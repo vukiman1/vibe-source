@@ -1,0 +1,70 @@
+{
+  "common": {
+    "appName": "Vibe Source",
+    "loading": "Đang tải...",
+    "error": "Đã có lỗi xảy ra",
+    "retry": "Thử lại",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "edit": "Sửa",
+    "search": "Tìm kiếm",
+    "noResults": "Không tìm thấy kết quả"
+  },
+  "nav": {
+    "home": "Trang chủ",
+    "sources": "Mã nguồn",
+    "categories": "Danh mục",
+    "pricing": "Bảng giá",
+    "about": "Giới thiệu",
+    "contact": "Liên hệ"
+  },
+  "auth": {
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "register": "Đăng ký",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "forgotPassword": "Quên mật khẩu?",
+    "noAccount": "Chưa có tài khoản?",
+    "hasAccount": "Đã có tài khoản?"
+  },
+  "home": {
+    "hero": {
+      "title": "Chợ Mã Nguồn Chất Lượng Cao",
+      "subtitle": "Tìm mã nguồn chất lượng cho dự án tiếp theo của bạn",
+      "cta": "Khám phá ngay"
+    },
+    "featured": {
+      "title": "Mã nguồn nổi bật",
+      "viewAll": "Xem tất cả"
+    }
+  },
+  "source": {
+    "price": "Giá",
+    "category": "Danh mục",
+    "technologies": "Công nghệ",
+    "preview": "Xem trước",
+    "buyNow": "Mua ngay",
+    "addToCart": "Thêm vào giỏ",
+    "description": "Mô tả"
+  },
+  "cart": {
+    "title": "Giỏ hàng",
+    "empty": "Giỏ hàng trống",
+    "total": "Tổng cộng",
+    "checkout": "Thanh toán",
+    "remove": "Xóa"
+  },
+  "footer": {
+    "rights": "Đã đăng ký bản quyền",
+    "privacy": "Chính sách bảo mật",
+    "terms": "Điều khoản dịch vụ",
+    "contact": "Liên hệ"
+  },
+  "theme": {
+    "light": "Sáng",
+    "dark": "Tối",
+    "system": "Hệ thống"
+  }
+}

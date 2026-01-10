@@ -1,0 +1,70 @@
+{
+  "common": {
+    "appName": "Vibe Source",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "noResults": "No results found"
+  },
+  "nav": {
+    "home": "Home",
+    "sources": "Source Codes",
+    "categories": "Categories",
+    "pricing": "Pricing",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?"
+  },
+  "home": {
+    "hero": {
+      "title": "Premium Source Code Marketplace",
+      "subtitle": "Find high-quality source codes for your next project",
+      "cta": "Explore Now"
+    },
+    "featured": {
+      "title": "Featured Sources",
+      "viewAll": "View All"
+    }
+  },
+  "source": {
+    "price": "Price",
+    "category": "Category",
+    "technologies": "Technologies",
+    "preview": "Live Preview",
+    "buyNow": "Buy Now",
+    "addToCart": "Add to Cart",
+    "description": "Description"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "remove": "Remove"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact Us"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  }
+}
