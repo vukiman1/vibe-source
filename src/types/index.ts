@@ -25,6 +25,37 @@ export interface SourceCode {
   updatedAt: string;
 }
 
+export interface Product {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  thumbnail?: string;
+  tags?: string[];
+  features?: string[];
+  rating: number;
+  reviewCount: number;
+  badge?: string;
+  category?: string;
+}
+
+export interface Seller {
+  id: string;
+  name: string;
+  avatar: string;
+  followers: string;
+  href: string;
+}
+
+export interface FlashSaleItem {
+  id: string;
+  title: string;
+  image: string;
+  price: number;
+  originalPrice?: number;
+  href: string;
+}
+
 export interface User {
   id: string;
   email: string;
