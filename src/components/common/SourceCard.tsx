@@ -26,7 +26,7 @@ export function SourceCard({ source }: SourceCardProps) {
     <Card className="group overflow-hidden transition-all hover:shadow-lg">
       <div className="relative aspect-video overflow-hidden">
         <Image
-          src={source.thumbnail || '/placeholder.png'}
+          src={source.thumbnail || '/assets/placeholder.jpg'}
           alt={source.title}
           fill
           className="object-cover transition-transform group-hover:scale-105"

@@ -21,7 +21,7 @@ const navItems = [
 
 export function SellerSidebar() {
   return (
-    <aside className="sticky top-0 h-full w-64 flex-shrink-0 overflow-y-auto border-r bg-background p-4">
+    <aside className="sticky top-0 h-full w-64 shrink-0 overflow-y-auto border-r bg-background p-4">
       <div className="mb-6">
         <h2 className="px-3 text-lg font-semibold">Seller Center</h2>
       </div>

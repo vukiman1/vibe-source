@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Store, Coins, Heart, ShoppingBag } from "lucide-react";
+import { Home, Coins, Heart, ShoppingBag, Sparkles } from "lucide-react";
 
 const navItems = [
   { icon: Home, label: "Home", href: "/" },
-  { icon: Store, label: "Marketplace", href: "/marketplace" },
+  { icon: Sparkles, label: "Welcome", href: "/welcome" },
   { icon: Coins, label: "Token Shop", href: "/token-shop", badge: "NEW" },
   { icon: Heart, label: "Wishlist", href: "/wishlist" },
   { icon: ShoppingBag, label: "Purchases", href: "/purchases" },

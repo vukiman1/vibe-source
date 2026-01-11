@@ -17,7 +17,7 @@ const mockProduct = {
   description:
     "Professional, high-conversion portfolio template designed for developers. Includes responsive layout, dark mode support, smooth animations, and SEO optimization. Perfect for showcasing your projects and skills.",
   price: 0,
-  thumbnail: "/placeholder.jpg",
+  thumbnail: "/assets/placeholder.jpg",
   tags: ["HTML", "CSS", "JavaScript"],
   features: ["Landing Page", "Portfolio", "Responsive", "Dark Mode"],
   rating: 4.8,
