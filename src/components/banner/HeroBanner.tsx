@@ -1,7 +1,25 @@
 "use client";
 
+import Link from "next/link";
 import { BannerCard } from "./BannerCard";
 import { BannerSlider } from "./BannerSlider";
+
+interface Keyword {
+  id: string;
+  label: string;
+  href: string;
+  color: string;
+}
+
+// Mock data - TODO: fetch from API
+const featuredKeywords: Keyword[] = [
+  { id: "k1", label: "Làm việc", href: "/category/work", color: "bg-teal-500 hover:bg-teal-600" },
+  { id: "k2", label: "Giải trí", href: "/category/entertainment", color: "bg-cyan-600 hover:bg-cyan-700" },
+  { id: "k3", label: "Học tập", href: "/category/education", color: "bg-indigo-500 hover:bg-indigo-600" },
+  { id: "k4", label: "AI", href: "/category/ai", color: "bg-slate-600 hover:bg-slate-700" },
+  { id: "k5", label: "Wallet", href: "/category/wallet", color: "bg-slate-700 hover:bg-slate-800" },
+  { id: "k6", label: "Youtube", href: "/category/youtube", color: "bg-red-500 hover:bg-red-600" },
+];
 
 interface Banner {
   id: string;
@@ -65,17 +83,38 @@ const sideBanners: Banner[] = [
  */
 export function HeroBanner() {
   return (
-    <div className="mb-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
-      {/* Main Slider - takes 2/3 width */}
-      <div className="lg:col-span-2">
-        <BannerSlider banners={mainBanners} />
+    <div className="mb-8 space-y-6">
+      {/* Banner Grid */}
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        {/* Main Slider - takes 2/3 width */}
+        <div className="lg:col-span-2">
+          <BannerSlider banners={mainBanners} />
+        </div>
+
+        {/* Side Banners - takes 1/3 width */}
+        <div className="flex flex-col gap-4">
+          {sideBanners.map((banner) => (
+            <BannerCard key={banner.id} banner={banner} />
+          ))}
+        </div>
       </div>
 
-      {/* Side Banners - takes 1/3 width */}
-      <div className="flex flex-col gap-4">
-        {sideBanners.map((banner) => (
-          <BannerCard key={banner.id} banner={banner} />
-        ))}
+      {/* Featured Keywords */}
+      <div className="rounded-lg bg-card p-4 shadow-sm">
+        <h3 className="mb-3 text-sm font-semibold text-muted-foreground">
+          Từ khóa nổi bật
+        </h3>
+        <div className="flex flex-wrap gap-3">
+          {featuredKeywords.map((keyword) => (
+            <Link
+              key={keyword.id}
+              href={keyword.href}
+              className={`rounded-lg px-6 py-3 text-sm font-medium text-white transition-all ${keyword.color}`}
+            >
+              {keyword.label}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
