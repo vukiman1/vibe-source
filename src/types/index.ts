@@ -31,3 +31,20 @@ export interface User {
   name: string;
   avatar?: string;
 }
+
+export interface CartItem {
+  id: string;
+  source: SourceCode;
+  quantity: number;
+}
+
+export interface Order {
+  id: string;
+  items: CartItem[];
+  total: number;
+  status: 'pending' | 'paid' | 'completed' | 'cancelled';
+  paymentMethod: string;
+  createdAt: string;
+}
+
+export * from './auth';

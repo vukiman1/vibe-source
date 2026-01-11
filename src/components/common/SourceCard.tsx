@@ -1,8 +1,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { ShoppingCart, Eye } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { formatCurrency, truncateText } from '@/lib/utils';
 import { ROUTES } from '@/constants';
 import type { SourceCode } from '@/types';
@@ -15,50 +23,65 @@ export function SourceCard({ source }: SourceCardProps) {
   const t = useTranslations('source');
 
   return (
-    <Card className="overflow-hidden transition-shadow hover:shadow-lg">
-      <div className="relative aspect-video">
+    <Card className="group overflow-hidden transition-all hover:shadow-lg">
+      <div className="relative aspect-video overflow-hidden">
         <Image
           src={source.thumbnail || '/placeholder.png'}
           alt={source.title}
           fill
-          className="object-cover"
+          className="object-cover transition-transform group-hover:scale-105"
         />
+        <div className="absolute inset-0 bg-black/60 opacity-0 transition-opacity group-hover:opacity-100 flex items-center justify-center gap-2">
+          {source.demoUrl && (
+            <Button size="sm" variant="secondary" asChild>
+              <Link href={source.demoUrl} target="_blank">
+                <Eye className="mr-1 h-4 w-4" />
+                {t('preview')}
+              </Link>
+            </Button>
+          )}
+        </div>
       </div>
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg">
-          <Link
-            href={ROUTES.SOURCE_DETAIL(source.id)}
-            className="hover:text-primary transition-colors"
-          >
-            {source.title}
-          </Link>
-        </CardTitle>
+        <div className="flex items-start justify-between gap-2">
+          <CardTitle className="line-clamp-1 text-lg">
+            <Link
+              href={ROUTES.SOURCE_DETAIL(source.id)}
+              className="hover:text-primary transition-colors"
+            >
+              {source.title}
+            </Link>
+          </CardTitle>
+          <Badge variant="secondary" className="shrink-0">
+            {source.category}
+          </Badge>
+        </div>
       </CardHeader>
       <CardContent className="pb-2">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted-foreground line-clamp-2">
           {truncateText(source.description, 100)}
         </p>
         <div className="mt-3 flex flex-wrap gap-1">
           {source.technologies.slice(0, 3).map((tech) => (
-            <span
-              key={tech}
-              className="rounded-full bg-secondary px-2 py-0.5 text-xs"
-            >
+            <Badge key={tech} variant="outline" className="text-xs">
               {tech}
-            </span>
+            </Badge>
           ))}
           {source.technologies.length > 3 && (
-            <span className="text-xs text-muted-foreground">
+            <Badge variant="outline" className="text-xs">
               +{source.technologies.length - 3}
-            </span>
+            </Badge>
           )}
         </div>
       </CardContent>
       <CardFooter className="flex items-center justify-between">
-        <span className="text-lg font-bold text-primary">
+        <span className="text-xl font-bold text-primary">
           {formatCurrency(source.price)}
         </span>
-        <Button size="sm">{t('addToCart')}</Button>
+        <Button size="sm">
+          <ShoppingCart className="mr-1 h-4 w-4" />
+          {t('addToCart')}
+        </Button>
       </CardFooter>
     </Card>
   );

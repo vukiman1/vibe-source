@@ -21,4 +21,20 @@ export const ROUTES = {
   PROFILE: '/profile',
   LOGIN: '/login',
   REGISTER: '/register',
+  FORGOT_PASSWORD: '/forgot-password',
 } as const;
+
+export const AUTH_COOKIE_NAME = 'auth_token';
+export const REFRESH_COOKIE_NAME = 'refresh_token';
+
+export const PUBLIC_ROUTES = [
+  '/',
+  '/login',
+  '/register',
+  '/forgot-password',
+  '/sources',
+];
+
+export const AUTH_ROUTES = ['/login', '/register', '/forgot-password'];
+
+export const PROTECTED_ROUTES = ['/checkout', '/profile', '/orders'];
