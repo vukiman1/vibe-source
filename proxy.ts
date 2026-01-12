@@ -1,13 +1,13 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import {
   AUTH_COOKIE_NAME,
   AUTH_ROUTES,
   PROTECTED_ROUTES,
   ROUTES,
-} from '@/constants';
+} from "@/constants";
 
-export function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get(AUTH_COOKIE_NAME)?.value;
 
@@ -24,7 +24,7 @@ export function middleware(request: NextRequest) {
   // Redirect to login if accessing protected route without token
   if (isProtectedRoute && !token) {
     const loginUrl = new URL(ROUTES.LOGIN, request.url);
-    loginUrl.searchParams.set('redirect', pathname);
+    loginUrl.searchParams.set("redirect", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
@@ -46,6 +46,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * - public folder
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\..*|_next).*)',
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\..*|_next).*)",
   ],
 };
