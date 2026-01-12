@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Banner {
   id: string;
@@ -22,10 +23,10 @@ interface BannerSliderProps {
 /**
  * Image slider with auto-play and navigation
  */
-export function BannerSlider({ 
-  banners, 
-  autoPlay = true, 
-  interval = 5000 
+export function BannerSlider({
+  banners,
+  autoPlay = true,
+  interval = 5000,
 }: BannerSliderProps) {
   const [current, setCurrent] = useState(0);
 
@@ -56,24 +57,32 @@ export function BannerSlider({
           key={banner.id}
           href={banner.href}
           className={`
-            absolute inset-0 transition-all duration-500 ease-out
-            ${index === current 
-              ? "opacity-100 translate-x-0" 
-              : index < current 
-                ? "opacity-0 -translate-x-full" 
+            group absolute inset-0 transition-all duration-500 ease-out
+            ${
+              index === current
+                ? "opacity-100 translate-x-0"
+                : index < current
+                ? "opacity-0 -translate-x-full"
                 : "opacity-0 translate-x-full"
             }
           `}
         >
-          {/* Gradient Background */}
-          <div 
-            className={`
-              absolute inset-0 bg-linear-to-r ${banner.gradient || "from-blue-500 to-cyan-400"}
-            `}
-          />
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src={banner.image}
+              alt={banner.title}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              priority={index === 0}
+            />
+          </div>
+
+          {/* Dark Overlay for Readability */}
+          <div className="absolute inset-0 z-10 bg-black/30 transition-colors duration-300 group-hover:bg-black/50" />
 
           {/* Content */}
-          <div className="relative flex h-full items-center px-8 sm:px-12">
+          <div className="relative z-20 flex h-full items-center px-8 sm:px-12">
             <div className="max-w-md text-white">
               <h2 className="text-2xl font-bold sm:text-3xl lg:text-4xl">
                 {banner.title}
@@ -122,9 +131,10 @@ export function BannerSlider({
             onClick={() => goTo(index)}
             className={`
               h-2 rounded-full transition-all duration-300
-              ${index === current 
-                ? "w-6 bg-white" 
-                : "w-2 bg-white/50 hover:bg-white/70"
+              ${
+                index === current
+                  ? "w-6 bg-white"
+                  : "w-2 bg-white/50 hover:bg-white/70"
               }
             `}
           />

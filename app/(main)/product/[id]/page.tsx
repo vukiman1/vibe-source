@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Star, Download, Eye, Heart, Share2, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -39,9 +38,11 @@ const mockProduct = {
   ],
 };
 
-export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
+export default async function ProductDetailPage({
+  params,
+}: ProductDetailPageProps) {
   const { id } = await params;
-
+  console.log(id);
   return (
     <div className="space-y-6">
       <nav className="text-sm text-muted-foreground">
@@ -67,7 +68,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             {mockProduct.screenshots.map((_, index) => (
               <div
                 key={index}
-                className="h-20 w-32 flex-shrink-0 rounded bg-muted"
+                className="h-20 w-32 shrink-0 rounded bg-muted"
               />
             ))}
           </div>
@@ -125,7 +126,9 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               <div className="mb-4">
                 {mockProduct.price === 0 ? (
                   <div className="flex items-center gap-2">
-                    <span className="text-3xl font-bold text-green-500">FREE</span>
+                    <span className="text-3xl font-bold text-green-500">
+                      FREE
+                    </span>
                     {mockProduct.badge && (
                       <Badge variant="outline">{mockProduct.badge}</Badge>
                     )}

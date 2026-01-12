@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Coins, Heart, ShoppingBag, Sparkles } from "lucide-react";
+import { useTranslations } from "@/i18n";
 
 const navItems = [
   { icon: Home, label: "Home", href: "/" },
@@ -14,7 +15,7 @@ const navItems = [
 
 export function Navigation() {
   const pathname = usePathname();
-
+  const t = useTranslations("nav");
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
@@ -33,10 +34,10 @@ export function Navigation() {
           }`}
         >
           <item.icon className="h-4 w-4" />
-          <span>{item.label}</span>
+          <span>{t(item.label)}</span>
           {item.badge && (
             <span className="ml-auto rounded bg-green-500 px-1.5 py-0.5 text-xs text-white">
-              {item.badge}
+              {t("bage." + item.badge)}
             </span>
           )}
         </Link>

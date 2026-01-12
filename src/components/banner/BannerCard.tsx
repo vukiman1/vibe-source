@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface Banner {
   id: string;
@@ -21,26 +22,30 @@ export function BannerCard({ banner }: BannerCardProps) {
     <Link
       href={banner.href}
       className="
-        relative flex-1 overflow-hidden rounded-2xl
+        group relative flex-1 overflow-hidden rounded-2xl
         min-h-[120px] lg:min-h-0
         transition-transform duration-300 hover:scale-[1.02]
       "
     >
-      {/* Gradient Background */}
-      <div 
-        className={`
-          absolute inset-0 bg-linear-to-r ${banner.gradient || "from-gray-500 to-gray-400"}
-        `}
-      />
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={banner.image}
+          alt={banner.title}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+      </div>
+
+      {/* Dark Overlay for Readability */}
+      <div className="absolute inset-0 z-10 bg-black/30 transition-colors duration-300 group-hover:bg-black/50" />
 
       {/* Content */}
-      <div className="relative flex h-full items-center p-4 sm:p-6">
+      <div className="relative z-20 flex h-full items-center p-4 sm:p-6">
         <div className="text-white">
-          <h3 className="text-lg font-bold sm:text-xl">
-            {banner.title}
-          </h3>
+          <h3 className="text-lg font-bold sm:text-xl">{banner.title}</h3>
           {banner.subtitle && (
-            <p className="mt-1 text-xs opacity-90 sm:text-sm">
+            <p className="bg-white m-0 text-center text-[#144a4f] mt-1 font-bold  text-xs opacity-90 sm:text-sm">
               {banner.subtitle}
             </p>
           )}

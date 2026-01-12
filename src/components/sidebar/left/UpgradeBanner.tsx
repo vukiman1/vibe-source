@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export function UpgradeBanner() {
   return (
-    <div className="absolute bottom-4 left-4 right-4 overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 to-blue-400 p-4 text-white">
+    <div className="absolute bottom-4 left-4 right-4 overflow-hidden rounded-xl bg-linear-to-r from-blue-600 to-blue-400 p-4 text-white">
       <div className="absolute bottom-6 -right-2">
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/20 text-xl font-bold">
           <span

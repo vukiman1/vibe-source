@@ -32,7 +32,7 @@ export default function WelcomePage() {
       <section className="mb-12">
         <h1 className="mb-4 text-4xl font-bold">
           Chào mừng đến với{" "}
-          <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-primary to-blue-600 bg-clip-text text-transparent">
             Vibe Coding
           </span>
         </h1>
@@ -62,7 +62,9 @@ export default function WelcomePage() {
               <CardContent className="pt-6">
                 <feature.icon className="mb-3 h-10 w-10 text-primary" />
                 <h3 className="mb-2 font-semibold">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground">{feature.description}</p>
+                <p className="text-sm text-muted-foreground">
+                  {feature.description}
+                </p>
               </CardContent>
             </Card>
           ))}

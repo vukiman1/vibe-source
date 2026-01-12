@@ -12,12 +12,24 @@
     "noResults": "Không tìm thấy kết quả"
   },
   "nav": {
-    "home": "Trang chủ",
-    "sources": "Mã nguồn",
-    "categories": "Danh mục",
-    "pricing": "Bảng giá",
-    "about": "Giới thiệu",
-    "contact": "Liên hệ"
+    "Home": "Trang chủ",
+    "Welcome": "Giới thiệu",
+    "Token Shop": "Token Shop",
+    "Sources": "Mã nguồn",
+    "Categories": "Danh mục",
+    "Pricing": "Bảng giá",
+    "About": "Giới thiệu",
+    "Wishlist": "Yêu thích",
+    "Purchases": "Lịch sử",
+    "contact": "Liên hệ",
+    "bage": {
+      "NEW": "Mới"
+    }
+  },
+  "header": {
+    "balance": "Số dư",
+    "tokens": "Token",
+    "search": "Tìm kiếm templates, UI kits..."
   },
   "auth": {
     "login": "Đăng nhập",

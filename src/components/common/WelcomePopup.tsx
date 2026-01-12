@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { LocaleSwitcher } from "@/components/ui/locale-switcher";
 import Image from "next/image";
 
 const SHOP_IMAGE = "/assets/images/welcome/popup/shop.png";
@@ -87,7 +86,7 @@ export function WelcomePopup() {
           <Link href="/" onClick={handleCardClick}>
             <div className="glass-card glass-card-cyan group h-full transition-all duration-300 hover:-translate-y-1">
               {/* Gradient Container with Image + Content */}
-              <div className="flex flex-col items-center rounded-2xl border border-cyan-400/40 bg-gradient-to-br from-cyan-500/40 via-blue-500/30 to-cyan-600/20 p-6">
+              <div className="flex flex-col items-center rounded-2xl border border-cyan-400/40 bg-linear-to-r from-cyan-500/40 via-blue-500/30 to-cyan-600/20 p-6">
                 {/* Image */}
                 <div
                   className="mb-4 w-full overflow-hidden rounded-2xl bg-cyan-900/30 border border-cyan-400/40 shadow-2xl"
@@ -110,7 +109,7 @@ export function WelcomePopup() {
                   <p className="mb-4 h-10 text-sm text-white/70">
                     Khám phá hàng ngàn source code chất lượng cao
                   </p>
-                  <Button className="border-2 border-cyan-400/50 rounded-full bg-gradient-to-r from-cyan-500 via-cyan-300 to-cyan-500 px-10 py-2 font-medium text-slate-800 shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-all hover:shadow-[0_0_30px_rgba(34,211,238,0.7)]">
+                  <Button className="border-2 border-cyan-400/50 rounded-full bg-linear-to-r from-cyan-500 via-cyan-300 to-cyan-500 px-10 py-2 font-medium text-slate-800 shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-all hover:shadow-[0_0_30px_rgba(34,211,238,0.7)]">
                     Xem ngay
                   </Button>
                 </div>
@@ -122,7 +121,7 @@ export function WelcomePopup() {
           <Link href="/seller/dashboard" onClick={handleCardClick}>
             <div className="glass-card glass-card-purple group h-full transition-all duration-300 hover:-translate-y-1">
               {/* Gradient Container with Image + Content */}
-              <div className="flex flex-col items-center rounded-2xl border border-purple-400/40 bg-gradient-to-br from-purple-500/40 via-pink-500/30 to-purple-600/20 p-6">
+              <div className="flex flex-col items-center rounded-2xl border border-purple-400/40 bg-linear-to-r from-purple-500/40 via-pink-500/30 to-purple-600/20 p-6">
                 {/* Image */}
                 <div
                   className="mb-4 w-full overflow-hidden rounded-2xl bg-purple-900/30 border border-purple-400/40 shadow-2xl"

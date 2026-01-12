@@ -12,12 +12,24 @@
     "noResults": "No results found"
   },
   "nav": {
-    "home": "Home",
-    "sources": "Source Codes",
-    "categories": "Categories",
-    "pricing": "Pricing",
-    "about": "About",
-    "contact": "Contact"
+    "Home": "Home",
+    "Sources": "Source Codes",
+    "Welcome": "Welcome",
+    "Categories": "Categories",
+    "Pricing": "Pricing",
+    "About": "About",
+    "Contact": "Contact",
+    "bage": {
+      "NEW": "New"
+    },
+    "Wishlist": "Wishlist",
+    "Purchases": "Purchases"
+  },
+
+  "header": {
+    "balance": "Balance",
+    "tokens": "Tokens",
+    "search": "Search templates, UI kits..."
   },
   "auth": {
     "login": "Login",
