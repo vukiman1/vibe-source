@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ProductCard } from "./ProductCard";
+import { ProductGrid } from "./ProductGrid";
 import type { Product } from "@/types";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -45,7 +46,7 @@ export function ProductSection({
   return (
     <section
       className={cn(
-        "mb-10 p-6 md:p-8 rounded-2xl bg-muted/40 border border-muted shadow-sm transition-colors",
+        "mb-10 p-6 md:p-8 rounded-2xl bg-muted border border-border shadow-sm transition-colors",
         className
       )}
     >
@@ -67,11 +68,7 @@ export function ProductSection({
       </div>
 
       {/* Product Grid */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {displayProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      <ProductGrid products={displayProducts} variant="scroll" />
 
       {/* Empty State */}
       {displayProducts.length === 0 && (

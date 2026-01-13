@@ -94,7 +94,7 @@ export function Footer({ className }: FooterProps) {
                   placeholder={t("newsletter.placeholder")}
                   className="border-0 shadow-none focus-visible:ring-0 bg-transparent text-(--text-secondary) placeholder:text-(--text-tertiary) font-medium text-lg h-12"
                 />
-                <Button className="bg-(--brand-primary) hover:bg-(--brand-primary-hover) text-white rounded-[18px] px-10 h-12 font-black shadow-lg shadow-blue-500/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
+                <Button className="bg-blue-500 hover:bg-blue-600 text-white rounded-[18px] px-5 h-12 font-black shadow-lg shadow-blue-500/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
                   {t("newsletter.button")}
                 </Button>
               </div>
@@ -150,7 +150,7 @@ export function Footer({ className }: FooterProps) {
           {/* Links Columns */}
           {sections.map((section) => (
             <div key={section.title} className="space-y-8">
-              <h3 className="flex items-center gap-2.5 text-md font-black uppercase">
+              <h3 className="flex text-blue-500 items-center gap-2.5 text-md font-black uppercase">
                 {section.icon}
                 {section.title}
               </h3>

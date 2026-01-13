@@ -45,7 +45,7 @@ export function BannerCard({ banner }: BannerCardProps) {
         <div className="text-white">
           <h3 className="text-lg font-bold sm:text-xl">{banner.title}</h3>
           {banner.subtitle && (
-            <p className="bg-white m-0 text-center text-[#144a4f] mt-1 font-bold  text-xs opacity-90 sm:text-sm">
+            <p className="bg-background m-0 text-center text-[#144a4f] dark:text-cyan-300 mt-1 font-bold  text-xs opacity-90 sm:text-sm">
               {banner.subtitle}
             </p>
           )}

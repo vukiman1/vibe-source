@@ -45,3 +45,10 @@ export function getInitials(name: string): string {
     .toUpperCase()
     .slice(0, 2);
 }
+
+export function formatCount(count: number): string {
+  if (count >= 1000) {
+    return (count / 1000).toFixed(1) + "k";
+  }
+  return count.toString();
+}
