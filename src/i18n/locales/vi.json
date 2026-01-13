@@ -29,7 +29,11 @@
   "header": {
     "balance": "Số dư",
     "tokens": "Token",
-    "search": "Tìm kiếm templates, UI kits..."
+    "search": "Tìm kiếm",
+    "search-placeholder": "Tìm kiếm templates, UI kits...",
+    "trending-searches": "Tìm kiếm phổ biến",
+    "suggested-products": "Gợi ý sản phẩm",
+    "view-all-results": "Xem tất cả kết quả"
   },
   "auth": {
     "login": "Đăng nhập",
@@ -69,10 +73,51 @@
     "remove": "Xóa"
   },
   "footer": {
-    "rights": "Đã đăng ký bản quyền",
-    "privacy": "Chính sách bảo mật",
-    "terms": "Điều khoản dịch vụ",
-    "contact": "Liên hệ"
+    "rights": "Bản quyền đã được bảo hộ.",
+    "privacy": "Bảo mật",
+    "terms": "Điều khoản",
+    "sitemap": "Sơ đồ trang",
+    "description": "Chợ mua bán mã nguồn cao cấp cho nhà phát triển. Mua, bán và giao dịch bằng VNĐ & Token.",
+    "newsletter": {
+      "title": "Kết nối với Vibe.",
+      "subtitle": "Giải mã những xu hướng mới nhất. Nhận các mẫu mã nguồn cao cấp trực tiếp vào hộp thư của bạn.",
+      "placeholder": "nhập_địa_chỉ_email...",
+      "button": "Khởi tạo",
+      "stats": "Tham gia cùng hơn 12,000 lập trình viên. Không spam, chỉ có giá trị."
+    },
+    "sections": {
+      "marketplace": {
+        "title": "CHỢ MUA BÁN",
+        "items": {
+          "templates": "Mẫu giao diện",
+          "scripts": "Vibe Scripts",
+          "uiKits": "Bộ thư viện UI",
+          "bundles": "Gói sản phẩm"
+        }
+      },
+      "community": {
+        "title": "CỘNG ĐỒNG",
+        "items": {
+          "discord": "Máy chủ Discord",
+          "contributors": "Người đóng góp",
+          "leaderboard": "Bảng xếp hạng",
+          "tokenomics": "Tokenomics"
+        }
+      },
+      "support": {
+        "title": "HỖ TRỢ",
+        "items": {
+          "documentation": "Tài liệu",
+          "apiStatus": "Trạng thái API",
+          "contact": "Liên hệ với chúng tôi",
+          "faq": "Câu hỏi thường gặp"
+        }
+      }
+    },
+    "status": {
+      "allSystems": "Tất cả hệ thống hoạt động bình thường",
+      "currency": "VNĐ / Tokens"
+    }
   },
   "theme": {
     "light": "Sáng",

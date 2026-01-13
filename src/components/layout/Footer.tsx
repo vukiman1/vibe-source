@@ -1,114 +1,219 @@
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
-import { cn } from '@/lib/utils';
-import { APP_NAME, ROUTES } from '@/constants';
-import { Separator } from '@/components/ui/separator';
+"use client";
+
+import Link from "next/link";
+import { useTranslations } from "@/i18n";
+import { cn } from "@/lib/utils";
+import { ROUTES } from "@/constants";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Github,
+  Twitter,
+  Disc,
+  LayoutGrid,
+  Users,
+  HelpCircle,
+  RefreshCw,
+  Monitor,
+} from "lucide-react";
 
 interface FooterProps {
   className?: string;
 }
 
 export function Footer({ className }: FooterProps) {
-  const t = useTranslations('footer');
-  const tNav = useTranslations('nav');
+  const t = useTranslations("footer");
 
-  const footerLinks = {
-    product: [
-      { href: ROUTES.SOURCES, label: tNav('sources') },
-      { href: '#categories', label: tNav('categories') },
-      { href: '#pricing', label: tNav('pricing') },
-    ],
-    company: [
-      { href: '#about', label: tNav('about') },
-      { href: '#contact', label: tNav('contact') },
-    ],
-    legal: [
-      { href: '/privacy', label: t('privacy') },
-      { href: '/terms', label: t('terms') },
-    ],
-  };
+  const sections = [
+    {
+      title: t("sections.marketplace.title"),
+      icon: <LayoutGrid className="h-4 w-4" />,
+      items: [
+        {
+          label: t("sections.marketplace.items.templates"),
+          href: ROUTES.SOURCES,
+        },
+        { label: t("sections.marketplace.items.scripts"), href: "#" },
+        { label: t("sections.marketplace.items.uiKits"), href: "#" },
+        { label: t("sections.marketplace.items.bundles"), href: "#" },
+      ],
+    },
+    {
+      title: t("sections.community.title"),
+      icon: <Users className="h-4 w-4" />,
+      items: [
+        { label: t("sections.community.items.discord"), href: "#" },
+        { label: t("sections.community.items.contributors"), href: "#" },
+        { label: t("sections.community.items.leaderboard"), href: "#" },
+        { label: t("sections.community.items.tokenomics"), href: "#" },
+      ],
+    },
+    {
+      title: t("sections.support.title"),
+      icon: <HelpCircle className="h-4 w-4" />,
+      items: [
+        { label: t("sections.support.items.documentation"), href: "#" },
+        { label: t("sections.support.items.apiStatus"), href: "#" },
+        { label: t("sections.support.items.contact"), href: "#" },
+        { label: t("sections.support.items.faq"), href: "#" },
+      ],
+    },
+  ];
 
   return (
-    <footer className={cn('border-t bg-background', className)}>
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-          <div className="col-span-2 md:col-span-1">
-            <Link
-              href={ROUTES.HOME}
-              className="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent"
-            >
-              {APP_NAME}
-            </Link>
-            <p className="mt-4 text-sm text-muted-foreground">
-              Premium source code marketplace for developers.
-            </p>
+    <footer className={cn("mt-20 px-6 pb-20", className)}>
+      <div className="max-w-7xl mx-auto bg-(--glass-bg) backdrop-blur-xl border border-(--glass-border) rounded-[40px] p-8 md:p-12 shadow-xl">
+        {/* 1. Newsletter Section */}
+        <div className="flex flex-col md:flex-row items-start justify-between gap-12 mb-16 px-4">
+          <div className="space-y-6 max-w-xl">
+            <div className="flex items-center gap-2 text-(--brand-accent) font-black text-[10px] uppercase tracking-[0.2em]">
+              <div className="h-5 w-5 bg-(--brand-primary) rounded-md flex items-center justify-center shadow-lg shadow-blue-500/20">
+                <Monitor className="h-3 w-3 text-white" />
+              </div>
+              SYSTEM UPDATE
+            </div>
+            <div className="space-y-4">
+              <h2 className="text-4xl font-black text-(--text-primary) tracking-tighter">
+                {t("newsletter.title")}
+              </h2>
+              <p className="text-(--text-secondary) opacity-60 text-md leading-relaxed font-medium max-w-md">
+                {t("newsletter.subtitle")}
+              </p>
+            </div>
           </div>
 
-          <div>
-            <h3 className="font-semibold">Product</h3>
-            <ul className="mt-4 space-y-3">
-              {footerLinks.product.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold">Company</h3>
-            <ul className="mt-4 space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold">Legal</h3>
-            <ul className="mt-4 space-y-3">
-              {footerLinks.legal.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="w-full md:w-auto mt-4">
+            <div className="space-y-4">
+              <div className="flex p-2 bg-(--surface-primary) border border-(--surface-border) rounded-[24px] shadow-sm min-w-0 md:min-w-[480px] focus-within:ring-2 focus-within:ring-(--brand-accent)/20 transition-all">
+                <div className="flex items-center px-4 text-(--text-tertiary)">
+                  <span className="font-mono text-lg leading-none opacity-50">
+                    &gt;
+                  </span>
+                </div>
+                <Input
+                  type="email"
+                  placeholder={t("newsletter.placeholder")}
+                  className="border-0 shadow-none focus-visible:ring-0 bg-transparent text-(--text-secondary) placeholder:text-(--text-tertiary) font-medium text-lg h-12"
+                />
+                <Button className="bg-(--brand-primary) hover:bg-(--brand-primary-hover) text-white rounded-[18px] px-10 h-12 font-black shadow-lg shadow-blue-500/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
+                  {t("newsletter.button")}
+                </Button>
+              </div>
+              <p className="text-xs text-(--text-tertiary) font-bold px-4 tracking-wide">
+                Join 12,000+ vibe coders.{" "}
+                <span className="opacity-50">No spam, just pure signal.</span>
+              </p>
+            </div>
           </div>
         </div>
 
-        <Separator className="my-8" />
+        <div className="w-full h-px bg-(--surface-border) mb-16 opacity-50" />
 
-        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} {APP_NAME}. {t('rights')}.
-          </p>
+        {/* 2. Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-20 px-4">
+          {/* Logo and About */}
+          <div className="space-y-8">
+            <div className="flex items-center gap-3">
+              <div className="h-11 w-11 bg-(--brand-accent) rounded-2xl flex items-center justify-center shadow-xl shadow-blue-500/30">
+                <div className="h-6 w-6 border-[2.5px] border-white rounded-lg flex items-center justify-center">
+                  <div className="w-2.5 h-0.5 bg-white rounded-full" />
+                </div>
+              </div>
+              <span className="text-2xl font-black text-(--text-primary) tracking-tighter">
+                VibeCode
+              </span>
+            </div>
+            <p className="text-(--text-secondary) text-sm leading-relaxed font-bold opacity-80">
+              {t("description")}
+            </p>
+            <div className="flex items-center gap-5 text-(--text-tertiary)">
+              <Link
+                href="#"
+                className="hover:text-(--brand-accent) transition-all hover:scale-110"
+              >
+                <Disc className="h-6 w-6" />
+              </Link>
+              <Link
+                href="#"
+                className="hover:text-(--brand-accent) transition-all hover:scale-110"
+              >
+                <Github className="h-6 w-6" />
+              </Link>
+              <Link
+                href="#"
+                className="hover:text-(--brand-accent) transition-all hover:scale-110"
+              >
+                <Twitter className="h-6 w-6" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Links Columns */}
+          {sections.map((section) => (
+            <div key={section.title} className="space-y-8">
+              <h3 className="flex items-center gap-2.5 text-md font-black uppercase">
+                {section.icon}
+                {section.title}
+              </h3>
+              <ul className="space-y-2">
+                {section.items.map((item) => (
+                  <li key={item.label}>
+                    <Link
+                      href={item.href}
+                      className="text-(--text-secondary) hover:text-(--brand-accent)  text-[15px] transition-colors tracking-tight"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="w-full h-px bg-(--surface-border) mb-10 opacity-50" />
+
+        {/* 3. Bottom Bar */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 px-4">
+          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-12">
+            <p className="text-[8px] font-black text-(--text-tertiary) uppercase tracking-widest opacity-80">
+              &copy; {new Date().getFullYear()} VibeCode Market. {t("rights")}
+            </p>
+            <div className="flex items-center gap-8">
+              <Link
+                href="/privacy"
+                className="text-[8px] font-black text-(--text-tertiary) hover:text-(--brand-accent) uppercase tracking-widest transition-colors"
+              >
+                {t("privacy")}
+              </Link>
+              <Link
+                href="/terms"
+                className="text-[8px] font-black text-(--text-tertiary) hover:text-(--brand-accent) uppercase tracking-widest transition-colors"
+              >
+                {t("terms")}
+              </Link>
+              <Link
+                href="#"
+                className="text-[8px] font-black text-(--text-tertiary) hover:text-(--brand-accent) uppercase tracking-widest transition-colors"
+              >
+                {t("sitemap")}
+              </Link>
+            </div>
+          </div>
+
           <div className="flex items-center gap-4">
-            <Link
-              href="https://github.com"
-              target="_blank"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-              </svg>
-            </Link>
+            <div className="flex items-center gap-2.5 bg-(--surface-secondary) border border-(--surface-border) rounded-full px-3 py-1 shadow-sm transition-all hover:bg-(--surface-primary)">
+              <RefreshCw className="h-3.5 w-3.5 text-(--text-tertiary)" />
+              <span className="text-[8px] font-black text-(--text-secondary) uppercase tracking-wider">
+                {t("status.currency")}
+              </span>
+            </div>
+            <div className="flex items-center gap-2.5 bg-(--status-success-bg) border border-(--status-success-border) rounded-full px-3 py-1 shadow-sm transition-all hover:scale-[1.02]">
+              <div className="h-2 w-2 rounded-full bg-(--status-success) animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+              <span className="text-[8px] font-black text-(--status-success-text) uppercase tracking-wider">
+                {t("status.allSystems")}
+              </span>
+            </div>
           </div>
         </div>
       </div>

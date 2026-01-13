@@ -194,11 +194,45 @@ pnpm lint
 - Export named exports (not default) for reusability
 - Barrel exports via `index.ts` files
 
-### Styling
+### Styling & Theming
 
-- Tailwind CSS utility classes
-- Dark mode support via `dark:` prefix
-- Custom colors defined in `globals.css`
+- **Tailwind CSS v4** utility classes
+- **CSS Variables-based theme system** (see `THEMING.md` for details)
+- **DO NOT use `dark:` prefix** - use semantic tokens instead
+- Custom colors defined in `app/globals.css`
+
+#### Theme System (IMPORTANT!)
+
+**❌ DON'T do this:**
+
+```tsx
+<div className="text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-900">
+```
+
+**✅ DO this instead:**
+
+```tsx
+<div className="text-(--text-primary) bg-(--surface-primary)">
+```
+
+#### Available Semantic Tokens
+
+| Category    | Tokens                                                         | Usage                      |
+| ----------- | -------------------------------------------------------------- | -------------------------- |
+| **Text**    | `--text-primary`, `--text-secondary`, `--text-tertiary`        | Headings, body, muted text |
+| **Brand**   | `--brand-primary`, `--brand-primary-hover`, `--brand-accent`   | Buttons, links, icons      |
+| **Surface** | `--surface-primary`, `--surface-secondary`, `--surface-border` | Cards, containers, borders |
+| **Glass**   | `--glass-bg`, `--glass-border`                                 | Glass effect backgrounds   |
+| **Status**  | `--status-success`, `--status-success-bg`, etc.                | Success/error states       |
+
+**Benefits:**
+
+- ✅ Automatic dark/light mode switching
+- ✅ No need to write `dark:` for every class
+- ✅ Consistent design system
+- ✅ Easy to maintain and scale
+
+**See `THEMING.md` for complete documentation.**
 
 ### File Naming
 
@@ -219,8 +253,9 @@ pnpm lint
 ### Implemented ✅
 
 - [x] Project setup with Next.js 16 + Tailwind 4
-- [x] Basic layout structure (Header, Sidebars)
+- [x] Basic layout structure (Header, Sidebars, Footer)
 - [x] Theme toggle (dark/light mode)
+- [x] **CSS Variables-based theme system** (semantic tokens)
 - [x] Component scaffolding
 
 ### In Progress 🔄
@@ -250,9 +285,11 @@ pnpm lint
 | Product Card  | `src/components/product/ProductCard.tsx` |
 | Left Sidebar  | `src/components/sidebar/left/`           |
 | Right Sidebar | `src/components/sidebar/right/`          |
+| Footer        | `src/components/layout/Footer.tsx`       |
 | Types         | `src/types/index.ts`                     |
 | API Services  | `src/services/`                          |
-| Theme         | `src/components/ui/theme-toggle.tsx`     |
+| Theme System  | `app/globals.css`, `THEMING.md`          |
+| Theme Toggle  | `src/components/ui/theme-toggle.tsx`     |
 
 ---
 
@@ -263,6 +300,28 @@ pnpm lint
 3. **Use TypeScript** with proper typing
 4. **Import from `@/`** alias
 5. **Keep components small** and focused
-6. **Add dark mode support** with `dark:` variants
+6. **Use semantic color tokens** instead of `dark:` variants (see Theme System above)
 7. **Use Radix UI** for complex interactions
 8. **Vietnamese UI text** for user-facing content
+
+### Theme System Quick Reference
+
+When styling components, ALWAYS use semantic tokens:
+
+```tsx
+// ❌ DON'T
+<div className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+
+// ✅ DO
+<div className="bg-(--surface-primary) text-(--text-primary)">
+```
+
+**Common Patterns:**
+
+- **Text**: `text-(--text-primary)`, `text-(--text-secondary)`, `text-(--text-tertiary)`
+- **Backgrounds**: `bg-(--surface-primary)`, `bg-(--surface-secondary)`, `bg-(--glass-bg)`
+- **Borders**: `border-(--surface-border)`, `border-(--glass-border)`
+- **Buttons**: `bg-(--brand-primary)`, `hover:bg-(--brand-primary-hover)`
+- **Icons/Accents**: `text-(--brand-accent)`
+
+For complete documentation, see `THEMING.md`.

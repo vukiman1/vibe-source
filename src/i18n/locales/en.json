@@ -16,6 +16,7 @@
     "Sources": "Source Codes",
     "Welcome": "Welcome",
     "Categories": "Categories",
+    "Token Shop": "Token Shop",
     "Pricing": "Pricing",
     "About": "About",
     "Contact": "Contact",
@@ -29,7 +30,11 @@
   "header": {
     "balance": "Balance",
     "tokens": "Tokens",
-    "search": "Search templates, UI kits..."
+    "search-placeholder": "Search templates, UI kits...",
+    "search": "Search",
+    "trending-searches": "Trending Searches",
+    "suggested-products": "Suggested Products",
+    "view-all-results": "View all results"
   },
   "auth": {
     "login": "Login",
@@ -69,10 +74,51 @@
     "remove": "Remove"
   },
   "footer": {
-    "rights": "All rights reserved",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
-    "contact": "Contact Us"
+    "rights": "All rights reserved.",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "sitemap": "Sitemap",
+    "description": "The premier marketplace for high-fidelity code templates. Buy, sell, and trade in VND & Tokens.",
+    "newsletter": {
+      "title": "Sync with the Vibe.",
+      "subtitle": "Decode the latest trends. Get high-fidelity templates delivered directly to your inbox.",
+      "placeholder": "enter_email_address...",
+      "button": "Initialize",
+      "stats": "Join 12,000+ vibe coders. No spam, just pure signal."
+    },
+    "sections": {
+      "marketplace": {
+        "title": "Marketplace",
+        "items": {
+          "templates": "Templates",
+          "scripts": "Vibe Scripts",
+          "uiKits": "UI Kits",
+          "bundles": "Bundles"
+        }
+      },
+      "community": {
+        "title": "Community",
+        "items": {
+          "discord": "Discord Server",
+          "contributors": "Contributors",
+          "leaderboard": "Leaderboard",
+          "tokenomics": "Tokenomics"
+        }
+      },
+      "support": {
+        "title": "Support",
+        "items": {
+          "documentation": "Documentation",
+          "apiStatus": "API Status",
+          "contact": "Contact Us",
+          "faq": "FAQ"
+        }
+      }
+    },
+    "status": {
+      "allSystems": "All Systems Operational",
+      "currency": "VND / Tokens"
+    }
   },
   "theme": {
     "light": "Light",
