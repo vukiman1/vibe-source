@@ -1,9 +1,12 @@
+"use client";
+
 import { Star, Download, Eye, Heart, Share2, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import { CurrencyDisplay } from "@/components/common/CurrencyDisplay";
 
 interface ProductDetailPageProps {
   params: Promise<{ id: string }>;
@@ -134,9 +137,12 @@ export default async function ProductDetailPage({
                     )}
                   </div>
                 ) : (
-                  <span className="text-3xl font-bold">
-                    {mockProduct.price.toLocaleString()}đ
-                  </span>
+                  <CurrencyDisplay
+                    amountInVND={mockProduct.price}
+                    className="text-3xl font-bold"
+                    compact={false}
+                    interactive={false}
+                  />
                 )}
               </div>
 

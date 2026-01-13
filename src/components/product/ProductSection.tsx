@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { ProductCard } from "./ProductCard";
 import type { Product } from "@/types";
 import type { LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ProductSectionProps {
   /** Section title */
@@ -42,9 +43,14 @@ export function ProductSection({
   const displayProducts = products.slice(0, maxItems);
 
   return (
-    <section className={`mb-10 ${className}`.trim()}>
+    <section
+      className={cn(
+        "mb-10 p-6 md:p-8 rounded-2xl bg-muted/40 border border-muted shadow-sm transition-colors",
+        className
+      )}
+    >
       {/* Header */}
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between ">
         <h2 className="flex items-center gap-2 text-xl font-bold">
           {Icon && <Icon className="h-5 w-5 text-primary" />}
           {title}

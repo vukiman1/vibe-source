@@ -1,39 +1,48 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
-import { CreditCard, Wallet, Loader2, ShieldCheck } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { Badge } from '@/components/ui/badge';
-import { formatCurrency } from '@/lib/utils';
-import { ROUTES } from '@/constants';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { CreditCard, Wallet, Loader2, ShieldCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
+import { useCurrency } from "@/providers/currency-provider";
+import { formatCurrency, convertFromVND } from "@/lib/currency";
+import { ROUTES } from "@/constants";
 
 const PAYMENT_METHODS = [
-  { id: 'card', name: 'Credit Card', icon: CreditCard },
-  { id: 'wallet', name: 'E-Wallet', icon: Wallet },
+  { id: "card", name: "Credit Card", icon: CreditCard },
+  { id: "wallet", name: "E-Wallet", icon: Wallet },
 ];
 
 // Mock cart data - replace with actual cart state
 const mockCartItems = [
-  { id: '1', title: 'E-commerce Template', price: 49.99 },
-  { id: '2', title: 'Admin Dashboard', price: 79.99 },
+  { id: "1", title: "E-commerce Template", price: 1200000 }, // VND
+  { id: "2", title: "Admin Dashboard", price: 2000000 }, // VND
 ];
 
 export default function CheckoutPage() {
-  const t = useTranslations('cart');
+  const t = useTranslations("cart");
   const router = useRouter();
+  const { currency } = useCurrency();
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedPayment, setSelectedPayment] = useState('card');
+  const [selectedPayment, setSelectedPayment] = useState("card");
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    couponCode: '',
+    name: "",
+    email: "",
+    couponCode: "",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const subtotal = mockCartItems.reduce((sum, item) => sum + item.price, 0);
   const discount = 0;
@@ -42,7 +51,7 @@ export default function CheckoutPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
       // TODO: Call orderService.checkout
@@ -50,12 +59,12 @@ export default function CheckoutPage() {
       //   paymentMethod: selectedPayment,
       //   billingInfo: formData,
       // });
-      console.log('Checkout:', { ...formData, paymentMethod: selectedPayment });
-      
+      console.log("Checkout:", { ...formData, paymentMethod: selectedPayment });
+
       // Redirect to payment gateway or success page
-      router.push('/checkout/success');
+      router.push("/checkout/success");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Checkout failed');
+      setError(err instanceof Error ? err.message : "Checkout failed");
     } finally {
       setIsLoading(false);
     }
@@ -63,13 +72,23 @@ export default function CheckoutPage() {
 
   const applyCoupon = () => {
     // TODO: Apply coupon logic
-    console.log('Apply coupon:', formData.couponCode);
+    console.log("Apply coupon:", formData.couponCode);
+  };
+
+  // Helper to format price in selected currency
+  const formatPrice = (amountInVND: number) => {
+    const converted =
+      currency === "VND" ? amountInVND : convertFromVND(amountInVND, currency);
+    return formatCurrency(converted, currency, {
+      showSymbol: true,
+      compact: false,
+    });
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">{t('checkout')}</h1>
-      
+      <h1 className="text-3xl font-bold mb-8">{t("checkout")}</h1>
+
       <div className="grid gap-8 lg:grid-cols-3">
         {/* Checkout Form */}
         <div className="lg:col-span-2 space-y-6">
@@ -89,7 +108,9 @@ export default function CheckoutPage() {
                     id="name"
                     placeholder="John Doe"
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
                     required
                   />
                 </div>
@@ -102,7 +123,9 @@ export default function CheckoutPage() {
                     type="email"
                     placeholder="name@example.com"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                     required
                   />
                 </div>
@@ -114,7 +137,9 @@ export default function CheckoutPage() {
           <Card>
             <CardHeader>
               <CardTitle>Payment Method</CardTitle>
-              <CardDescription>Choose your preferred payment method</CardDescription>
+              <CardDescription>
+                Choose your preferred payment method
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -125,8 +150,8 @@ export default function CheckoutPage() {
                     onClick={() => setSelectedPayment(method.id)}
                     className={`flex items-center gap-3 p-4 rounded-lg border-2 transition-colors ${
                       selectedPayment === method.id
-                        ? 'border-primary bg-primary/5'
-                        : 'border-border hover:border-primary/50'
+                        ? "border-primary bg-primary/5"
+                        : "border-border hover:border-primary/50"
                     }`}
                   >
                     <method.icon className="h-5 w-5" />
@@ -134,8 +159,8 @@ export default function CheckoutPage() {
                   </button>
                 ))}
               </div>
-              
-              {selectedPayment === 'card' && (
+
+              {selectedPayment === "card" && (
                 <div className="mt-6 space-y-4">
                   <div className="space-y-2">
                     <label htmlFor="cardNumber" className="text-sm font-medium">
@@ -179,7 +204,7 @@ export default function CheckoutPage() {
                 {mockCartItems.map((item) => (
                   <div key={item.id} className="flex justify-between text-sm">
                     <span className="text-muted-foreground">{item.title}</span>
-                    <span>{formatCurrency(item.price)}</span>
+                    <span>{formatPrice(item.price)}</span>
                   </div>
                 ))}
               </div>
@@ -191,7 +216,9 @@ export default function CheckoutPage() {
                 <Input
                   placeholder="Coupon code"
                   value={formData.couponCode}
-                  onChange={(e) => setFormData({ ...formData, couponCode: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, couponCode: e.target.value })
+                  }
                 />
                 <Button variant="outline" onClick={applyCoupon}>
                   Apply
@@ -204,17 +231,17 @@ export default function CheckoutPage() {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Subtotal</span>
-                  <span>{formatCurrency(subtotal)}</span>
+                  <span>{formatPrice(subtotal)}</span>
                 </div>
                 {discount > 0 && (
                   <div className="flex justify-between text-sm text-green-600">
                     <span>Discount</span>
-                    <span>-{formatCurrency(discount)}</span>
+                    <span>-{formatPrice(discount)}</span>
                   </div>
                 )}
                 <div className="flex justify-between font-semibold text-lg">
-                  <span>{t('total')}</span>
-                  <span>{formatCurrency(total)}</span>
+                  <span>{t("total")}</span>
+                  <span>{formatPrice(total)}</span>
                 </div>
               </div>
 
@@ -232,7 +259,7 @@ export default function CheckoutPage() {
                 disabled={isLoading}
               >
                 {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Pay {formatCurrency(total)}
+                Pay {formatPrice(total)}
               </Button>
               <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
                 <ShieldCheck className="h-4 w-4" />

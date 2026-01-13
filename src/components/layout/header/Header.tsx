@@ -1,23 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, ShoppingBag, Bell } from "lucide-react";
+import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ROUTES } from "@/constants";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { useTranslations } from "@/i18n";
 import { UserMenu } from "./UserMenu";
 import { SearchBar } from "./SearchBar";
 import { HeaderStats } from "./HeaderStats";
+import { CartMenu } from "./CartMenu";
+import { NotificationMenu } from "./NotificationMenu";
 
 interface HeaderProps {
   className?: string;
 }
 
 export function Header({ className }: HeaderProps) {
-  const t = useTranslations("header");
-
   return (
     <header
       className={cn(
@@ -53,25 +51,10 @@ export function Header({ className }: HeaderProps) {
           <HeaderStats />
 
           {/* Cart */}
-          <div className="hidden md:flex items-center gap-2 rounded-full border bg-background px-3 py-1.5 shadow-sm">
-            <div className="relative">
-              <ShoppingBag className="h-5 w-5 text-slate-700" />
-              <Badge className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-0 text-[10px] text-white">
-                2
-              </Badge>
-            </div>
-            <span className="text-sm font-bold text-slate-800">1.2tr</span>
-          </div>
+          <CartMenu />
 
           {/* Notification */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="relative rounded-full hover:bg-muted"
-          >
-            <Bell className="h-5 w-5 text-slate-700" />
-            <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500 box-content border-2 border-background"></span>
-          </Button>
+          <NotificationMenu />
 
           {/* User Menu */}
           <UserMenu />

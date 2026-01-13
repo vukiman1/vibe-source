@@ -13,7 +13,6 @@ import {
   LayoutGrid,
   Users,
   HelpCircle,
-  RefreshCw,
   Monitor,
 } from "lucide-react";
 
@@ -174,46 +173,29 @@ export function Footer({ className }: FooterProps) {
         <div className="w-full h-px bg-(--surface-border) mb-10 opacity-50" />
 
         {/* 3. Bottom Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 px-4">
-          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-12">
-            <p className="text-[8px] font-black text-(--text-tertiary) uppercase tracking-widest opacity-80">
-              &copy; {new Date().getFullYear()} VibeCode Market. {t("rights")}
-            </p>
-            <div className="flex items-center gap-8">
-              <Link
-                href="/privacy"
-                className="text-[8px] font-black text-(--text-tertiary) hover:text-(--brand-accent) uppercase tracking-widest transition-colors"
-              >
-                {t("privacy")}
-              </Link>
-              <Link
-                href="/terms"
-                className="text-[8px] font-black text-(--text-tertiary) hover:text-(--brand-accent) uppercase tracking-widest transition-colors"
-              >
-                {t("terms")}
-              </Link>
-              <Link
-                href="#"
-                className="text-[8px] font-black text-(--text-tertiary) hover:text-(--brand-accent) uppercase tracking-widest transition-colors"
-              >
-                {t("sitemap")}
-              </Link>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2.5 bg-(--surface-secondary) border border-(--surface-border) rounded-full px-3 py-1 shadow-sm transition-all hover:bg-(--surface-primary)">
-              <RefreshCw className="h-3.5 w-3.5 text-(--text-tertiary)" />
-              <span className="text-[8px] font-black text-(--text-secondary) uppercase tracking-wider">
-                {t("status.currency")}
-              </span>
-            </div>
-            <div className="flex items-center gap-2.5 bg-(--status-success-bg) border border-(--status-success-border) rounded-full px-3 py-1 shadow-sm transition-all hover:scale-[1.02]">
-              <div className="h-2 w-2 rounded-full bg-(--status-success) animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-              <span className="text-[8px] font-black text-(--status-success-text) uppercase tracking-wider">
-                {t("status.allSystems")}
-              </span>
-            </div>
+        <div className="flex flex-col text-[10px] md:flex-row items-center gap-6 md:gap-12">
+          <p className=" font-black text-(--text-tertiary) uppercase tracking-widest opacity-80">
+            &copy; {new Date().getFullYear()} VibeCode Market. {t("rights")}
+          </p>
+          <div className="flex items-center gap-8">
+            <Link
+              href="/privacy"
+              className=" font-bold text-(--text-tertiary) hover:text-(--brand-accent) uppercase tracking-widest transition-colors"
+            >
+              {t("privacy")}
+            </Link>
+            <Link
+              href="/terms"
+              className=" font-bold text-(--text-tertiary) hover:text-(--brand-accent) uppercase tracking-widest transition-colors"
+            >
+              {t("terms")}
+            </Link>
+            <Link
+              href="#"
+              className=" font-bold text-(--text-tertiary) hover:text-(--brand-accent) uppercase tracking-widest transition-colors"
+            >
+              {t("sitemap")}
+            </Link>
           </div>
         </div>
       </div>

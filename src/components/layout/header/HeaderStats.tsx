@@ -3,6 +3,7 @@
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "@/i18n";
+import { CurrencyDisplay } from "@/components";
 
 export function HeaderStats() {
   const t = useTranslations("header");
@@ -13,7 +14,14 @@ export function HeaderStats() {
         <span className="text-[10px] font-bold uppercase text-muted-foreground tracking-wider">
           {t("balance")}
         </span>
-        <span className="text-sm font-bold text-slate-800">2.450.000đ</span>
+        <span className="text-sm font-bold text-slate-800">
+          {" "}
+          <CurrencyDisplay
+            amountInVND={2450000}
+            className="text-sm font-bold text-slate-800"
+            compact={false}
+          />
+        </span>
         <Button
           variant="ghost"
           size="icon"

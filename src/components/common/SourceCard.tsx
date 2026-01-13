@@ -1,32 +1,33 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { useTranslations } from 'next-intl';
-import { ShoppingCart, Eye } from 'lucide-react';
+import Link from "next/link";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { ShoppingCart, Eye } from "lucide-react";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { formatCurrency, truncateText } from '@/lib/utils';
-import { ROUTES } from '@/constants';
-import type { SourceCode } from '@/types';
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { truncateText } from "@/lib/utils";
+import { CurrencyDisplay } from "@/components/common/CurrencyDisplay";
+import { ROUTES } from "@/constants";
+import type { SourceCode } from "@/types";
 
 interface SourceCardProps {
   source: SourceCode;
 }
 
 export function SourceCard({ source }: SourceCardProps) {
-  const t = useTranslations('source');
+  const t = useTranslations("source");
 
   return (
     <Card className="group overflow-hidden transition-all hover:shadow-lg">
       <div className="relative aspect-video overflow-hidden">
         <Image
-          src={source.thumbnail || '/assets/placeholder.jpg'}
+          src={source.thumbnail || "/assets/placeholder.jpg"}
           alt={source.title}
           fill
           className="object-cover transition-transform group-hover:scale-105"
@@ -36,7 +37,7 @@ export function SourceCard({ source }: SourceCardProps) {
             <Button size="sm" variant="secondary" asChild>
               <Link href={source.demoUrl} target="_blank">
                 <Eye className="mr-1 h-4 w-4" />
-                {t('preview')}
+                {t("preview")}
               </Link>
             </Button>
           )}
@@ -75,12 +76,15 @@ export function SourceCard({ source }: SourceCardProps) {
         </div>
       </CardContent>
       <CardFooter className="flex items-center justify-between">
-        <span className="text-xl font-bold text-primary">
-          {formatCurrency(source.price)}
-        </span>
+        <CurrencyDisplay
+          amountInVND={source.price}
+          className="text-xl font-bold text-primary"
+          compact={false}
+          interactive={false}
+        />
         <Button size="sm">
           <ShoppingCart className="mr-1 h-4 w-4" />
-          {t('addToCart')}
+          {t("addToCart")}
         </Button>
       </CardFooter>
     </Card>

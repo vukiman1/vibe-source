@@ -1,14 +1,14 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { CurrencyDisplay } from "@/components/common/CurrencyDisplay";
 
 interface FlashSaleItem {
   id: string;
   title: string;
   image: string;
-  price: string;
-  originalPrice?: string;
+  price: number; // VND
+  originalPrice?: number; // VND
   tokenPrice?: string;
   href: string;
 }
@@ -18,8 +18,8 @@ const flashSaleItems: FlashSaleItem[] = [
     id: "1",
     title: "DarkViz Components Vue.js Pro Kit",
     image: "/assets/images/products/p1.png",
-    price: "375k",
-    originalPrice: "725.000",
+    price: 375000, // VND
+    originalPrice: 725000, // VND
     tokenPrice: "150 VIBE",
     href: "/products/1",
   },
@@ -27,8 +27,8 @@ const flashSaleItems: FlashSaleItem[] = [
     id: "2",
     title: "3D Portfolio Three.js Template",
     image: "/assets/images/products/p2.png",
-    price: "800k",
-    originalPrice: "1.600.000",
+    price: 800000, // VND
+    originalPrice: 1600000, // VND
     tokenPrice: "320 VIBE",
     href: "/products/2",
   },
@@ -80,13 +80,19 @@ function FlashSaleCard({ item }: { item: FlashSaleItem }) {
 
         <div>
           <div className="flex items-baseline gap-2">
-            <span className="text-lg font-bold text-red-500">
-              {item.price}đ
-            </span>
+            <CurrencyDisplay
+              amountInVND={item.price}
+              className="text-lg font-bold text-red-500"
+              compact={true}
+              interactive={false}
+            />
             {item.originalPrice && (
-              <span className="text-xs text-muted-foreground line-through decoration-slate-400">
-                {item.originalPrice}đ
-              </span>
+              <CurrencyDisplay
+                amountInVND={item.originalPrice}
+                className="text-xs text-muted-foreground line-through decoration-slate-400"
+                compact={true}
+                interactive={false}
+              />
             )}
           </div>
 

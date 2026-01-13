@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { CurrencyDisplay } from "@/components/common/CurrencyDisplay";
 import { Star } from "lucide-react";
 import type { Product } from "@/types";
 
@@ -63,7 +64,12 @@ export function ProductCard({ product }: ProductCardProps) {
               FREE
             </Badge>
           ) : (
-            <span className="font-bold">{product.price}đ</span>
+            <CurrencyDisplay
+              amountInVND={product.price}
+              className="font-bold"
+              compact={false}
+              interactive={false}
+            />
           )}
           {product.badge && (
             <Badge variant="outline" className="ml-2 text-orange-500">

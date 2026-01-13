@@ -27,16 +27,16 @@ export function Navigation() {
         <Link
           key={item.href}
           href={item.href}
-          className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors ${
+          className={`flex items-center gap-3 rounded-lg px-3 py-3 text-md font-bold transition-colors ${
             isActive(item.href)
-              ? "bg-primary text-primary-foreground"
+              ? "bg-blue-50 text-primary"
               : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
           }`}
         >
           <item.icon className="h-4 w-4" />
           <span>{t(item.label)}</span>
           {item.badge && (
-            <span className="ml-auto rounded bg-green-500 px-1.5 py-0.5 text-xs text-white">
+            <span className="ml-auto rounded bg-violet-500 px-1.5 py-0.5 text-xs text-white">
               {t("bage." + item.badge)}
             </span>
           )}
