@@ -95,7 +95,7 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
         </div>
 
-        <p className="mt-3 h-[2.5rem] line-clamp-2 text-[13px] font-medium leading-relaxed text-muted-foreground">
+        <p className="mt-3 h-2.5rem line-clamp-2 text-[13px] font-medium leading-relaxed text-muted-foreground">
           {product.description}
         </p>
 

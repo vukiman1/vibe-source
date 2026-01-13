@@ -13,7 +13,7 @@ export default function MainLayout({
       <Header />
       <LeftSidebar />
       <RightSidebar />
-      <main className="ml-64 mr-72 min-h-[calc(100vh-64px)] p-6">
+      <main className="min-h-[calc(100vh-64px)] p-4 sm:p-6 lg:ml-64 lg:mr-72">
         {children}
         <Footer />
       </main>

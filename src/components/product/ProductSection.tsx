@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ProductCard } from "./ProductCard";
 import { ProductGrid } from "./ProductGrid";
 import type { Product } from "@/types";
 import type { LucideIcon } from "lucide-react";

@@ -5,7 +5,7 @@ import { TopSellers } from "./TopSellers";
 
 export function RightSidebar() {
   return (
-    <aside className="fixed right-0 top-16 h-[calc(100vh-64px)] w-72 shrink-0 overflow-y-auto  bg-background p-4">
+    <aside className="fixed right-0 top-16 hidden h-[calc(100vh-64px)] w-72 shrink-0 overflow-y-auto bg-background p-4 lg:block">
       <FlashSale />
       <TopSellers />
     </aside>
