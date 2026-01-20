@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Chat App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .messages {
+        height: 400px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 20px;
+        background: #fafafa;
+      }
+      .message {
+        margin: 10px 0;
+        padding: 8px 12px;
+        border-radius: 15px;
+        max-width: 80%;
+      }
+      .message.own {
+        background: #007bff;
+        color: white;
+        margin-left: auto;
+        text-align: right;
+      }
+      .message.other {
+        background: #e9ecef;
+        color: #333;
+      }
+      .input-area {
+        display: flex;
+        gap: 10px;
+      }
+      input[type='text'] {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      button {
+        padding: 10px 20px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+      .status {
+        text-align: center;
+        color: #666;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>💬 Simple Chat ..............................</h2>
+      <div class="status" id="status">Connecting...</div>
+
+      <div class="messages" id="messages"></div>
+
+      <div class="input-area">
+        <input
+          type="text"
+          id="messageInput"
+          placeholder="Type your message..."
+          autocomplete="off"
+        />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+      const socket = io(`/chat`);
+      const messages = document.getElementById('messages');
+      const messageInput = document.getElementById('messageInput');
+      const status = document.getElementById('status');
+
+      let username = prompt('Enter your name:') || 'Anonymous';
+      let userId = prompt('Enter your user ID:') || 'user123';
+
+      socket.on('connect', () => {
+        status.textContent = 'Connected!';
+        status.style.color = 'green';
+      });
+
+      socket.emit('room:join', { conversationId: 'room1' });
+      console.log('Emitting room:join', { conversationId: 'room1' });
+
+      socket.on('message:send', (data) => {
+        addMessage(data.content, data.userId !== userId);
+      });
+
+      socket.on('message:new', (data) => {
+        console.log('message:new', data);
+        addMessage(data.content, data.userId !== userId);
+      });
+      socket.on('disconnect', () => {
+        status.textContent = 'Disconnected';
+        status.style.color = 'red';
+      });
+
+      function addMessage(text, isOther = false) {
+        console.log('Adding message', text, isOther);
+        const div = document.createElement('div');
+        div.className = `message ${isOther ? 'other' : 'own'}`;
+        div.textContent = text;
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      function sendMessage() {
+        const message = messageInput.value.trim();
+        addMessage(message, true);
+        if (message) {
+          socket.emit('message:send', {
+            conversationId: 'room1',
+            content: message,
+            userId: userId,
+          });
+          messageInput.value = '';
+        }
+      }
+
+      messageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+      });
+    </script>
+  </body>
+</html>
