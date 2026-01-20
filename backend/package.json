@@ -1,0 +1,9 @@
+{
+  "name": "@vibe-source/backend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "echo \"Backend dev script not yet configured\" && exit 0",
+    "build": "echo \"Backend build script not yet configured\" && exit 0"
+  }
+}

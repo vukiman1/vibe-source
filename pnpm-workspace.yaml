@@ -1,8 +1,9 @@
 packages:
-  - .
+  - "frontend"
+  - "backend"
 
 ignoredBuiltDependencies:
-  - '@parcel/watcher'
-  - '@swc/core'
+  - "@parcel/watcher"
+  - "@swc/core"
   - sharp
   - unrs-resolver
