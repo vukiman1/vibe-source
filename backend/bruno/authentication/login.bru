@@ -9,3 +9,14 @@ post {
   body: json
   auth: inherit
 }
+
+body:json {
+  {
+    "email": "admin@gmail.com",
+    "password": "123456"
+  }
+}
+
+vars:pre-request {
+  BASE_URL: http://localhost:8000/api/v1/
+}
