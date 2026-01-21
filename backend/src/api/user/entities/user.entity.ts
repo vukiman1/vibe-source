@@ -1,28 +1,28 @@
-import { BaseEntity } from '@app/base';
-import { Roles } from '@app/enum';
-import { Exclude } from 'class-transformer';
-import { BeforeInsert, Column, Entity, Index, Unique } from 'typeorm';
-import * as argon2 from 'argon2';
+import { BaseEntity } from "@app/base";
+import { Roles } from "@app/enum";
+import { Exclude } from "class-transformer";
+import { BeforeInsert, Column, Entity, Index, Unique } from "typeorm";
+import * as argon2 from "argon2";
 
-@Entity('users')
-@Unique(['email'])
-@Index('fulltext_index', ['email'], { fulltext: true })
+@Entity("users")
+@Unique(["email"])
+@Index("fulltext_index", ["email"], { fulltext: true })
 export class UserEntity extends BaseEntity {
   @Column({
     unique: true,
     nullable: false,
-    type: 'varchar',
+    type: "varchar",
     length: 255,
-    name: 'email',
+    name: "email",
   })
   email!: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 255, name: 'password' })
+  @Column({ nullable: false, type: "varchar", length: 255, name: "password" })
   @Exclude()
   password!: string;
 
   @Column({
-    type: 'enum',
+    type: "enum",
     enum: Roles,
     nullable: false,
     default: Roles.USER,

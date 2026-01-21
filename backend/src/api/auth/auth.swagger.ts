@@ -1,14 +1,14 @@
-import { OkResponse } from '@app/base/base.swagger';
-import { applyDecorators } from '@nestjs/common';
-import { ApiOperation, getSchemaPath } from '@nestjs/swagger';
-import { UserType } from './interfaces/auth.interface';
-import { UserEntity } from '../user/entities/user.entity';
+import { OkResponse } from "@app/base/base.swagger";
+import { applyDecorators } from "@nestjs/common";
+import { ApiOperation, getSchemaPath } from "@nestjs/swagger";
+import { UserType } from "./interfaces/auth.interface";
+import { UserEntity } from "../user/entities/user.entity";
 
 const getRef = (userType: UserType) => {
   let $ref;
 
   switch (userType) {
-    case 'user':
+    case "user":
       $ref = UserEntity;
       break;
   }
@@ -19,13 +19,13 @@ const getRef = (userType: UserType) => {
 const loginResponse = (userType: UserType) => ({
   properties: {
     result: {
-      type: 'array',
+      type: "array",
       items: {
         properties: {
           user: {
             $ref: getSchemaPath(getRef(userType)),
           },
-          accessToken: { example: 'string' },
+          accessToken: { example: "string" },
         },
       },
     },
@@ -33,7 +33,7 @@ const loginResponse = (userType: UserType) => ({
 });
 export function ApiLogin(userType: UserType) {
   return applyDecorators(
-    ApiOperation({ summary: 'Login for ' + userType }),
+    ApiOperation({ summary: "Login for " + userType }),
     OkResponse(null, false, loginResponse(userType)),
   );
 }

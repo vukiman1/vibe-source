@@ -1,11 +1,11 @@
-import { BaseEntity } from '@app/base';
+import { BaseEntity } from "@app/base";
 import {
   FindOptionsOrder,
   FindOptionsWhere,
   Repository,
   SelectQueryBuilder,
-} from 'typeorm';
-import { PaginationToQuery } from './paginationToQuery';
+} from "typeorm";
+import { PaginationToQuery } from "./paginationToQuery";
 
 export function getQueryBuilder<Entity extends BaseEntity>(
   repo: Repository<Entity>,
@@ -17,7 +17,7 @@ export function getQueryBuilder<Entity extends BaseEntity>(
   const { skip, take } = PaginationToQuery(query);
   delete query.limit;
   delete query.page;
-  let queryBuilder = repo.createQueryBuilder('entity');
+  let queryBuilder = repo.createQueryBuilder("entity");
   queryBuilder = addRelations(queryBuilder, relations);
   if (where) {
     queryBuilder = addWhere(queryBuilder, where);
@@ -47,12 +47,12 @@ function addWhere<Entity extends BaseEntity>(
   for (let i = 0; i < whereKeys.length; i++) {
     const key = whereKeys[i];
     let queryString = `entity.${key} = ${where[key]}`;
-    if (typeof where[key] === 'string') {
+    if (typeof where[key] === "string") {
       queryString = `entity.${key} = '${where[key]}'`;
     }
-    let whereMethod = 'andWhere';
+    let whereMethod = "andWhere";
     if (i === 0) {
-      whereMethod = 'where';
+      whereMethod = "where";
     }
     queryBuilder[whereMethod](queryString);
   }
@@ -67,11 +67,11 @@ function addQuery<Entity extends BaseEntity>(
   const queryKeys = Object.keys(query);
   queryKeys.forEach((key) => {
     const value: string = query[key];
-    const queryObjects = key.split('.');
+    const queryObjects = key.split(".");
     let queryString = `entity.${key} LIKE '%${value}%'`;
-    let whereMethod = 'andWhere';
+    let whereMethod = "andWhere";
     if (whereKeys.length === 0) {
-      whereMethod = 'where';
+      whereMethod = "where";
     }
     if (queryObjects.length > 1) {
       queryString = `${key} LIKE '%${value}%'`;

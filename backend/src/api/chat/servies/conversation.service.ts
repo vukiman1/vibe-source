@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { BaseService } from '@app/base';
-import { ConversationsEntity } from '../entities/conversations.entity';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable } from "@nestjs/common";
+import { BaseService } from "@app/base";
+import { ConversationsEntity } from "../entities/conversations.entity";
+import { Repository } from "typeorm";
+import { InjectRepository } from "@nestjs/typeorm";
 
 @Injectable()
 export class ConversationService extends BaseService<ConversationsEntity> {
-  name = 'Conversation';
+  name = "Conversation";
 
   constructor(
     @InjectRepository(ConversationsEntity)
@@ -16,6 +16,6 @@ export class ConversationService extends BaseService<ConversationsEntity> {
   }
 
   async test() {
-    return 'test';
+    return "test";
   }
 }

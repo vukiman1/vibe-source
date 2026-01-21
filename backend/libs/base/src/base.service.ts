@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { getQueryBuilder } from '@app/helpers/queryBuilder';
-import { NotFoundException } from '@nestjs/common';
+import { getQueryBuilder } from "@app/helpers/queryBuilder";
+import { NotFoundException } from "@nestjs/common";
 import {
   DeepPartial,
   FindOptionsOrder,
   FindOptionsWhere,
   Repository,
-} from 'typeorm';
-import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
-import { PaginationDto } from './base.dto';
-import { BaseEntity } from './base.entity';
+} from "typeorm";
+import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
+import { PaginationDto } from "./base.dto";
+import { BaseEntity } from "./base.entity";
 
 export abstract class BaseService<Entity extends BaseEntity> {
   abstract name: string;

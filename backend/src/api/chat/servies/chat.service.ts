@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { ConversationsEntity } from '../entities/conversations.entity';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
-import { BaseService } from '@app/base';
+import { Injectable } from "@nestjs/common";
+import { ConversationsEntity } from "../entities/conversations.entity";
+import { Repository } from "typeorm";
+import { InjectRepository } from "@nestjs/typeorm";
+import { BaseService } from "@app/base";
 
 @Injectable()
 export class ChatService extends BaseService<ConversationsEntity> {
-  name = 'Chat';
+  name = "Chat";
 
   constructor(
     @InjectRepository(ConversationsEntity)

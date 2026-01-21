@@ -1,14 +1,14 @@
-import { applyDecorators } from '@nestjs/common';
+import { applyDecorators } from "@nestjs/common";
 import {
   ApiCreatedResponse,
   ApiOkResponse,
   ApiOperation,
   getSchemaPath,
-} from '@nestjs/swagger';
+} from "@nestjs/swagger";
 import {
   ReferenceObject,
   SchemaObject,
-} from '@nestjs/swagger/dist/interfaces/open-api-spec.interface';
+} from "@nestjs/swagger/dist/interfaces/open-api-spec.interface";
 
 export function OkResponse(
   $ref: any,
@@ -24,7 +24,7 @@ export function OkResponse(
     let refData: SchemaObject | ReferenceObject = { $ref: getSchemaPath($ref) };
     if (isPagination) {
       refData = {
-        type: 'array',
+        type: "array",
         items: { $ref: getSchemaPath($ref) },
       };
       metadata = {
@@ -61,7 +61,7 @@ export function CreatedResponse($ref: any) {
         data: {
           properties: {
             result: {
-              type: 'array',
+              type: "array",
               items: {
                 $ref: getSchemaPath($ref),
               },
@@ -75,35 +75,35 @@ export function CreatedResponse($ref: any) {
 
 export function ApiCreate($ref: any, name?: string) {
   return applyDecorators(
-    ApiOperation({ summary: 'Create new ' + name }),
+    ApiOperation({ summary: "Create new " + name }),
     CreatedResponse($ref),
   );
 }
 
 export function ApiGetAll($ref: any, name?: string) {
   return applyDecorators(
-    ApiOperation({ summary: 'Get all ' + name }),
+    ApiOperation({ summary: "Get all " + name }),
     OkResponse($ref, true),
   );
 }
 
 export function ApiGetDetail($ref: any, name?: string) {
   return applyDecorators(
-    ApiOperation({ summary: 'Get detail ' + name }),
+    ApiOperation({ summary: "Get detail " + name }),
     OkResponse($ref),
   );
 }
 
 export function ApiUpdate($ref: any, name?: string) {
   return applyDecorators(
-    ApiOperation({ summary: 'Update ' + name }),
+    ApiOperation({ summary: "Update " + name }),
     OkResponse($ref),
   );
 }
 
 export function ApiDelete($ref: any, name?: string) {
   return applyDecorators(
-    ApiOperation({ summary: 'Delete ' + name }),
+    ApiOperation({ summary: "Delete " + name }),
     OkResponse($ref),
   );
 }

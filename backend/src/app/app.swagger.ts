@@ -1,21 +1,21 @@
-import { INestApplication, Logger } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import configuration from '@app/config';
+import { INestApplication, Logger } from "@nestjs/common";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import configuration from "@app/config";
 
 interface SwaggerOperation {
-  get(key: 'method'): string;
-  get(key: 'path'): string;
+  get(key: "method"): string;
+  get(key: "path"): string;
   get(key: string): unknown;
 }
 
 export function useSwagger(app: INestApplication) {
-  const logger = new Logger('Swagger');
+  const logger = new Logger("Swagger");
   const port = configuration().app.port;
-  const path = 'docs';
+  const path = "docs";
   const config = new DocumentBuilder()
-    .setTitle('NestJS Example')
-    .setDescription('NestJS Example Documentation')
-    .setVersion('1.0')
+    .setTitle("NestJS Example")
+    .setDescription("NestJS Example Documentation")
+    .setVersion("1.0")
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config, {
@@ -23,23 +23,23 @@ export function useSwagger(app: INestApplication) {
   });
   SwaggerModule.setup(path, app, document, {
     swaggerOptions: {
-      tagsSorter: 'alpha',
+      tagsSorter: "alpha",
       operationsSorter: (a: SwaggerOperation, b: SwaggerOperation) => {
         const methodsOrder = [
-          'get',
-          'post',
-          'put',
-          'patch',
-          'delete',
-          'options',
-          'trace',
+          "get",
+          "post",
+          "put",
+          "patch",
+          "delete",
+          "options",
+          "trace",
         ];
         let result =
-          methodsOrder.indexOf(a.get('method')) -
-          methodsOrder.indexOf(b.get('method'));
+          methodsOrder.indexOf(a.get("method")) -
+          methodsOrder.indexOf(b.get("method"));
 
         if (result === 0) {
-          result = a.get('path').localeCompare(b.get('path'));
+          result = a.get("path").localeCompare(b.get("path"));
         }
 
         return result;

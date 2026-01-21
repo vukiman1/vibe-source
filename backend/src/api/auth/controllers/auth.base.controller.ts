@@ -1,12 +1,12 @@
-import { User } from '@app/decorators/user.decorator';
-import { Body, HttpCode, Post, Res, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import type { Response } from 'express';
-import { ApiLogin } from '../auth.swagger';
-import { UserType } from '../interfaces/auth.interface';
-import { AuthService } from '../services/auth.service';
-import { UserEntity } from 'src/api/user/entities/user.entity';
-import { LoginDto } from '../dto/login.dto';
+import { User } from "@app/decorators/user.decorator";
+import { Body, HttpCode, Post, Res, UseGuards } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
+import type { Response } from "express";
+import { ApiLogin } from "../auth.swagger";
+import { UserType } from "../interfaces/auth.interface";
+import { AuthService } from "../services/auth.service";
+import { UserEntity } from "src/api/user/entities/user.entity";
+import { LoginDto } from "../dto/login.dto";
 
 export const AuthBaseController = <Entity extends UserEntity>(
   userType: UserType,
@@ -15,7 +15,7 @@ export const AuthBaseController = <Entity extends UserEntity>(
   class BaseController {
     constructor(public readonly authService: AuthService) {}
 
-    @Post('login')
+    @Post("login")
     @HttpCode(200)
     @ApiLogin(userType)
     @UseGuards(AuthGuard(strategyKey))

@@ -1,7 +1,7 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { JwtService as NestJwtService } from '@nestjs/jwt';
-import { JwtPayload } from './jwt.payload';
-import { ConfigService } from '@nestjs/config';
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { JwtService as NestJwtService } from "@nestjs/jwt";
+import { JwtPayload } from "./jwt.payload";
+import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class JwtService {
@@ -12,10 +12,10 @@ export class JwtService {
 
   async signJwt(payload: JwtPayload, isRefreshToken = false): Promise<string> {
     const refreshTokenExpiresIn = this.configService.get<string>(
-      'jwt.refreshTokenExpiresIn',
+      "jwt.refreshTokenExpiresIn",
     );
     const accessTokenExpiresIn = this.configService.get<string>(
-      'jwt.accessTokenExpiresIn',
+      "jwt.accessTokenExpiresIn",
     );
     const expiresIn = isRefreshToken
       ? refreshTokenExpiresIn

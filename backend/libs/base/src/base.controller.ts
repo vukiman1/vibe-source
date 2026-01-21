@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Body, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
-import { PaginationDto } from './base.dto';
-import { BaseEntity } from './base.entity';
-import { BaseService } from './base.service';
+import { Body, Delete, Get, Param, Patch, Post, Query } from "@nestjs/common";
+import { PaginationDto } from "./base.dto";
+import { BaseEntity } from "./base.entity";
+import { BaseService } from "./base.service";
 import {
   ApiCreate,
   ApiDelete,
   ApiGetAll,
   ApiGetDetail,
   ApiUpdate,
-} from './base.swagger';
+} from "./base.swagger";
 
 export function BaseController<Entity extends BaseEntity>(
   $ref: any,
@@ -20,39 +20,39 @@ export function BaseController<Entity extends BaseEntity>(
 
     constructor(public readonly service: BaseService<Entity>) {}
 
-    @Post('create')
+    @Post("create")
     @ApiCreate($ref, name)
     create(@Body() body): Promise<Entity> {
       return this.service.create(body);
     }
 
-    @Get('all')
+    @Get("all")
     @ApiGetAll($ref, name)
     getAll(@Query() query: PaginationDto): Promise<[Entity[], number]> {
       return this.service.getAllWithPagination(
         query,
         {},
         //@ts-ignore
-        { createdAt: 'DESC' },
+        { createdAt: "DESC" },
         ...this.relations,
       );
     }
 
-    @Get('detail/:id')
+    @Get("detail/:id")
     @ApiGetDetail($ref, name)
-    getDetail(@Param('id') id: string): Promise<Entity> {
+    getDetail(@Param("id") id: string): Promise<Entity> {
       return this.service.getOneByIdOrFail(id, ...this.relations);
     }
 
-    @Patch('update/:id')
+    @Patch("update/:id")
     @ApiUpdate($ref, name)
-    update(@Param('id') id: string, @Body() body): Promise<Entity> {
+    update(@Param("id") id: string, @Body() body): Promise<Entity> {
       return this.service.updateById(id, body);
     }
 
-    @Delete('delete/:id')
+    @Delete("delete/:id")
     @ApiDelete($ref, name)
-    delete(@Param('id') id: string): Promise<Entity> {
+    delete(@Param("id") id: string): Promise<Entity> {
       return this.service.softDeleteById(id);
     }
   }

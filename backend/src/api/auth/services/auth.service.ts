@@ -2,14 +2,14 @@ import {
   BadRequestException,
   ConflictException,
   Injectable,
-} from '@nestjs/common';
-import { Response } from 'express';
-import { RegisterDto } from '../dto/register.dto';
-import { CryptoService } from '@app/crypto';
-import { UserEntity } from 'src/api/user/entities/user.entity';
-import { JwtService } from '@app/jwt';
-import { UserService } from 'src/api/user/user.service';
-import { SetCookieRFToken } from '@app/helpers/setCookieRFToken';
+} from "@nestjs/common";
+import { Response } from "express";
+import { RegisterDto } from "../dto/register.dto";
+import { CryptoService } from "@app/crypto";
+import { UserEntity } from "src/api/user/entities/user.entity";
+import { JwtService } from "@app/jwt";
+import { UserService } from "src/api/user/user.service";
+import { SetCookieRFToken } from "@app/helpers/setCookieRFToken";
 
 @Injectable()
 export class AuthService {
@@ -20,7 +20,7 @@ export class AuthService {
   ) {}
   findAll() {
     return {
-      message: 'Auth me',
+      message: "Auth me",
     };
   }
   async login(user: UserEntity, response: Response) {
@@ -44,12 +44,12 @@ export class AuthService {
   async register({ email, password, confirmPassword }: RegisterDto) {
     if (password !== confirmPassword) {
       throw new BadRequestException(
-        'Password and confirm password do not match',
+        "Password and confirm password do not match",
       );
     }
     const existingUser = await this.userService.getOne({ email });
     if (existingUser) {
-      throw new ConflictException('Email already exists');
+      throw new ConflictException("Email already exists");
     }
     await this.userService.create({
       email,
@@ -57,7 +57,7 @@ export class AuthService {
     });
 
     return {
-      message: 'User registered successfully',
+      message: "User registered successfully",
       email,
     };
   }

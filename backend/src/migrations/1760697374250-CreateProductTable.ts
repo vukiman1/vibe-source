@@ -1,37 +1,37 @@
-import { ProductType } from '@app/enum';
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { ProductType } from "@app/enum";
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class ProductTable1760694551516 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'products',
+        name: "products",
         columns: [
           {
-            name: 'id',
-            type: 'integer',
+            name: "id",
+            type: "integer",
             isGenerated: true,
-            generationStrategy: 'increment',
+            generationStrategy: "increment",
             isPrimary: true,
           },
           {
-            name: 'title',
-            type: 'varchar',
+            name: "title",
+            type: "varchar",
             isNullable: false,
           },
           {
-            name: 'description',
-            type: 'varchar',
+            name: "description",
+            type: "varchar",
             isNullable: false,
           },
           {
-            name: 'price',
-            type: 'integer',
+            name: "price",
+            type: "integer",
             isNullable: false,
           },
           {
-            name: 'type',
-            type: 'enum',
+            name: "type",
+            type: "enum",
             enum: Object.values(ProductType),
             isNullable: false,
           },
@@ -41,6 +41,6 @@ export class ProductTable1760694551516 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('products');
+    await queryRunner.dropTable("products");
   }
 }
