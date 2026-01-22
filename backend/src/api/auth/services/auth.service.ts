@@ -10,6 +10,7 @@ import { UserEntity } from "src/api/user/entities/user.entity";
 import { JwtService } from "@app/jwt";
 import { UserService } from "src/api/user/user.service";
 import { SetCookieRFToken } from "@app/helpers/setCookieRFToken";
+import { RedisService } from "@app/redis";
 
 @Injectable()
 export class AuthService {
@@ -17,6 +18,7 @@ export class AuthService {
     private readonly cryptoService: CryptoService,
     private readonly jwtService: JwtService,
     private readonly userService: UserService,
+    private readonly redisService: RedisService,
   ) {}
   findAll() {
     return {
@@ -31,8 +33,8 @@ export class AuthService {
     const refreshToken = await this.jwtService.signJwt(payload, true);
 
     // // Cache token
-    // this.redisService.setRefreshToken(id, refreshToken);
-    // this.redisService.setAccessToken(id, accessToken);
+    this.redisService.setRefreshToken(id, refreshToken);
+    this.redisService.setAccessToken(id, accessToken);
 
     // // Encrypt cookie
     const encryptId = this.cryptoService.encryptData(id);

@@ -25,7 +25,8 @@
     "migration:run": "npm run typeorm migration:run -- -d ./ormconfigs.ts",
     "migration:generate": "npm run typeorm -- -d ./ormconfigs.ts migration:generate ./src/migrations/$npm_config_name",
     "migration:create": "npm run typeorm -- migration:create ./src/migrations/$npm_config_name",
-    "migration:revert": "npm run typeorm -- -d ./ormconfigs.ts migration:revert"
+    "migration:revert": "npm run typeorm -- -d ./ormconfigs.ts migration:revert",
+    "g:lib": "nest g lib $npm_config_name --prefix app"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -50,6 +51,7 @@
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "ioredis": "^5.9.2",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "passport-jwt": "^4.0.1",
@@ -69,6 +71,7 @@
     "@nestjs/testing": "^11.0.1",
     "@types/config": "^3.3.5",
     "@types/express": "^5.0.0",
+    "@types/ioredis": "^5.0.0",
     "@types/jest": "^30.0.0",
     "@types/lodash": "^4.17.20",
     "@types/node": "^22.10.7",
@@ -119,7 +122,8 @@
       "^@app/enum(|/.*)$": "<rootDir>/libs/enum/src/$1",
       "^@app/helpers(|/.*)$": "<rootDir>/libs/helpers/src/$1",
       "^@app/jwt(|/.*)$": "<rootDir>/libs/jwt/src/$1",
-      "^@app/my-library(|/.*)$": "<rootDir>/libs/my-library/src/$1"
+      "^@app/my-library(|/.*)$": "<rootDir>/libs/my-library/src/$1",
+      "^@app/redis(|/.*)$": "<rootDir>/libs/redis/src/$1"
     }
   }
 }

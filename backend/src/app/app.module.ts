@@ -13,6 +13,7 @@ import { CryptoModule } from "@app/crypto";
 import { JwtModule } from "@app/jwt";
 import configuration from "@app/config";
 import { ProductsModule } from "src/api/products/products.module";
+import { RedisModule } from "@app/redis";
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { ProductsModule } from "src/api/products/products.module";
     UserModule,
     ChatModule,
     ProductsModule,
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService],

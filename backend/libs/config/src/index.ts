@@ -25,4 +25,9 @@ export default () => ({
     secretKey: process.env.SECRET_KEY || "vibe_source_secret_key",
     secretKeyIv: process.env.SECRET_KEY_IV || "vibe_source_secret_iv",
   },
+  redis: {
+    host: process.env.REDIS_HOST || "localhost",
+    port: parseInt(process.env.REDIS_PORT || "6379", 10),
+    password: process.env.REDIS_PASSWORD || undefined,
+  },
 });
