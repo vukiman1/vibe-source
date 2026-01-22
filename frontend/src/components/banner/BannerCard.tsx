@@ -21,6 +21,7 @@ export function BannerCard({ banner }: BannerCardProps) {
   return (
     <Link
       href={banner.href}
+      prefetch={false}
       className="
         group relative flex-1 overflow-hidden rounded-2xl
         min-h-[120px] lg:min-h-0

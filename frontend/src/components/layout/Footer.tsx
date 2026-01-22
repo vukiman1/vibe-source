@@ -128,18 +128,21 @@ export function Footer({ className }: FooterProps) {
             <div className="flex items-center gap-5 text-(--text-tertiary)">
               <Link
                 href="#"
+                prefetch={false}
                 className="hover:text-(--brand-accent) transition-all hover:scale-110"
               >
                 <Disc className="h-6 w-6" />
               </Link>
               <Link
                 href="#"
+                prefetch={false}
                 className="hover:text-(--brand-accent) transition-all hover:scale-110"
               >
                 <Github className="h-6 w-6" />
               </Link>
               <Link
                 href="#"
+                prefetch={false}
                 className="hover:text-(--brand-accent) transition-all hover:scale-110"
               >
                 <Twitter className="h-6 w-6" />
@@ -159,6 +162,7 @@ export function Footer({ className }: FooterProps) {
                   <li key={item.label}>
                     <Link
                       href={item.href}
+                      prefetch={false}
                       className="text-(--text-secondary) hover:text-(--brand-accent)  text-[15px] transition-colors tracking-tight"
                     >
                       {item.label}
@@ -180,18 +184,21 @@ export function Footer({ className }: FooterProps) {
           <div className="flex items-center gap-8">
             <Link
               href="/privacy"
+              prefetch={false}
               className=" font-bold text-(--text-tertiary) hover:text-(--brand-accent) uppercase tracking-widest transition-colors"
             >
               {t("privacy")}
             </Link>
             <Link
               href="/terms"
+              prefetch={false}
               className=" font-bold text-(--text-tertiary) hover:text-(--brand-accent) uppercase tracking-widest transition-colors"
             >
               {t("terms")}
             </Link>
             <Link
               href="#"
+              prefetch={false}
               className=" font-bold text-(--text-tertiary) hover:text-(--brand-accent) uppercase tracking-widest transition-colors"
             >
               {t("sitemap")}

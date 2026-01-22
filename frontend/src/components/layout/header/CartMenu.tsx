@@ -11,7 +11,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { CurrencyDisplay } from "@/components/common/CurrencyDisplay";
 
@@ -99,7 +98,7 @@ export function CartMenu() {
 
         {MOCK_CART_ITEMS.length > 0 && (
           <div className="p-4 bg-muted/10">
-            <Link href={ROUTES.CART} className="w-full">
+            <Link href={ROUTES.CART} prefetch={false} className="w-full">
               <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-widest py-5">
                 {t("checkout")}
               </Button>

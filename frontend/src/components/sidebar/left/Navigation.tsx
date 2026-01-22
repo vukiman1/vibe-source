@@ -27,6 +27,7 @@ export function Navigation() {
         <Link
           key={item.href}
           href={item.href}
+          prefetch={false}
           className={`flex items-center gap-3 rounded-lg px-3 py-3 text-md font-bold transition-colors ${
             isActive(item.href)
               ? "bg-blue-50 text-primary"

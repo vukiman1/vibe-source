@@ -139,6 +139,7 @@ export function HeroBanner() {
             <Link
               key={keyword.id}
               href={keyword.href}
+              prefetch={false}
               className={`rounded-lg px-6 py-3 text-sm font-medium text-white transition-all ${keyword.color}`}
             >
               {keyword.label}

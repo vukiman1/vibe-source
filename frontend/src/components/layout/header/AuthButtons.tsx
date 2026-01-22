@@ -14,7 +14,7 @@ export function AuthButtons() {
         size="sm"
         className="hidden md:flex gap-2 hover:bg-blue-50 hover:text-blue-600 transition-colors"
       >
-        <Link href={ROUTES.LOGIN}>
+        <Link href={ROUTES.LOGIN} prefetch={false}>
           <LogIn className="h-4 w-4" />
           <span className="font-semibold">Đăng nhập</span>
         </Link>
@@ -24,7 +24,7 @@ export function AuthButtons() {
         size="sm"
         className="gap-2 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 shadow-md shadow-blue-500/20"
       >
-        <Link href={ROUTES.REGISTER}>
+        <Link href={ROUTES.REGISTER} prefetch={false}>
           <UserPlus className="h-4 w-4" />
           <span className="font-semibold">Đăng ký</span>
         </Link>

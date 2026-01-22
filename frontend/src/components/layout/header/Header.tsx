@@ -46,6 +46,7 @@ export function Header({ className }: HeaderProps) {
         {!isSearchExpanded && (
           <Link
             href={ROUTES.HOME}
+            prefetch={false}
             className="flex items-center shrink-0 group transition-all"
           >
             <div className="relative flex h-9 w-9 items-center justify-center">

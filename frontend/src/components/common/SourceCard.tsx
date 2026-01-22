@@ -35,7 +35,7 @@ export function SourceCard({ source }: SourceCardProps) {
         <div className="absolute inset-0 bg-black/60 opacity-0 transition-opacity group-hover:opacity-100 flex items-center justify-center gap-2">
           {source.demoUrl && (
             <Button size="sm" variant="secondary" asChild>
-              <Link href={source.demoUrl} target="_blank">
+              <Link href={source.demoUrl} target="_blank" prefetch={false}>
                 <Eye className="mr-1 h-4 w-4" />
                 {t("preview")}
               </Link>
@@ -48,6 +48,7 @@ export function SourceCard({ source }: SourceCardProps) {
           <CardTitle className="line-clamp-1 text-lg">
             <Link
               href={ROUTES.SOURCE_DETAIL(source.id)}
+              prefetch={false}
               className="hover:text-primary transition-colors"
             >
               {source.title}

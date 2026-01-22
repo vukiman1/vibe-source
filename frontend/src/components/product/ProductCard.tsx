@@ -18,7 +18,11 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   return (
     <Card className="group flex h-full flex-col overflow-hidden rounded-[28px] border-none bg-card shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:shadow-[0_20px_50px_rgb(0,0,0,0.08)]">
-      <Link href={`/product/${product.id}`} className="relative block shrink-0">
+      <Link
+        href={`/product/${product.id}`}
+        prefetch={false}
+        className="relative block shrink-0"
+      >
         <div className="relative aspect-4/3 overflow-hidden p-3.5 pb-0">
           <div className="relative h-full w-full overflow-hidden rounded-[20px] bg-muted">
             {product.thumbnail && (
@@ -78,7 +82,11 @@ export function ProductCard({ product }: ProductCardProps) {
 
       <CardContent className="flex flex-1 flex-col p-6">
         <div className="flex items-center justify-between gap-3">
-          <Link href={`/product/${product.id}`} className="min-w-0 flex-1">
+          <Link
+            href={`/product/${product.id}`}
+            prefetch={false}
+            className="min-w-0 flex-1"
+          >
             <h3 className="h-3.5rem line-clamp-2 text-lg font-black tracking-tight text-card-foreground">
               {product.title}
             </h3>
