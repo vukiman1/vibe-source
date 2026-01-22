@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Search, X, TrendingUp, Package, ArrowRight } from "lucide-react";
+import { Search, TrendingUp, Package, ArrowRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "@/i18n";
@@ -107,7 +107,7 @@ export function SearchBar() {
           className="sm:hidden shrink-0"
         >
           <Search className="h-5 w-5" />
-          <span className="sr-only">Tìm kiếm</span>
+          <span className="sr-only">{t("search")}</span>
         </Button>
       )}
 
@@ -119,17 +119,19 @@ export function SearchBar() {
           // Desktop: always visible
           "hidden sm:flex",
           // Mobile: show when expanded
-          isSearchExpanded && "flex absolute left-0 right-0 z-50 px-4"
+          isSearchExpanded && "flex absolute left-0 right-0 z-50 px-4",
         )}
       >
         <div
           className={cn(
             "flex w-full items-center gap-2 rounded-full border bg-muted/50 px-2 shadow-sm transition-all duration-200 focus-within:bg-background focus-within:ring-2 focus-within:ring-blue-500/20",
             isOpen &&
-              "rounded-b-none border-b-transparent bg-background shadow-lg"
+              "rounded-b-none border-b-transparent bg-background shadow-lg",
           )}
         >
-          <Search className="ml-2 h-4 w-4 text-muted-foreground" />
+          <button onClick={handleSearch}>
+            <Search className="ml-2 h-4 w-4 text-muted-foreground" />
+          </button>
           <Input
             ref={inputRef}
             type="search"
@@ -143,16 +145,16 @@ export function SearchBar() {
             placeholder={t("search-placeholder")}
             className="flex-1 border-none bg-transparent shadow-none focus-visible:ring-0 placeholder:text-muted-foreground/70"
           />
-          {query && (
+          {/* {query && (
             <Button
               variant="ghost"
               size="icon"
               className="h-6 w-6 rounded-full hover:bg-muted"
               onClick={() => setQuery("")}
             >
-              <X className="h-3 w-3" />
+              clear
             </Button>
-          )}
+          )} */}
           {/* Close button on mobile */}
           {isSearchExpanded && (
             <Button
@@ -161,20 +163,11 @@ export function SearchBar() {
               className="h-8 w-8 rounded-full hover:bg-muted sm:hidden"
               onClick={collapseSearch}
             >
-              <X className="h-4 w-4" />
+              Đóng
               <span className="sr-only">Đóng tìm kiếm</span>
             </Button>
           )}
           {/* Search button - hide on mobile when expanded */}
-          <Button
-            onClick={handleSearch}
-            className={cn(
-              "rounded-full bg-blue-600 px-6 font-medium text-white hover:bg-blue-700 h-8 my-1 ml-1",
-              isSearchExpanded && "hidden sm:flex"
-            )}
-          >
-            {t("search")}
-          </Button>
         </div>
 
         {isOpen && (

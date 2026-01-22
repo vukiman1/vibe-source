@@ -20,10 +20,11 @@ export interface AuthUser {
   email: string;
   name: string;
   avatar?: string;
-  role: 'user' | 'admin';
+  role: "user" | "admin";
 }
 
 export interface AuthResponse {
   user: AuthUser;
-  tokens: AuthTokens;
+  accessToken: string;
+  refreshToken: string;
 }
