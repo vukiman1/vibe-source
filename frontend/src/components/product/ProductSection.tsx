@@ -1,17 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  TrendingUp,
+  Sparkles,
+  Globe,
+  Smartphone,
+  type LucideIcon,
+} from "lucide-react";
 import { ProductGrid } from "./ProductGrid";
 import type { Product } from "@/types";
-import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+// Icon mapping for serialization from Server Components
+const ICON_MAP: Record<string, LucideIcon> = {
+  TrendingUp,
+  Sparkles,
+  Globe,
+  Smartphone,
+};
 
 interface ProductSectionProps {
   /** Section title */
   title: string;
-  /** Optional icon for the title */
-  icon?: LucideIcon;
+  /** Icon name (key from ICON_MAP) - use string for Server Component compatibility */
+  iconName?: keyof typeof ICON_MAP;
   /** Products to display */
   products: Product[];
   /** Link to view all products in this section */
@@ -27,26 +41,27 @@ interface ProductSectionProps {
  * Usage:
  * <ProductSection
  *   title="Phổ biến"
- *   icon={TrendingUp}
+ *   iconName="TrendingUp"
  *   products={popularProducts}
  *   viewAllHref="/category/popular"
  * />
  */
 export function ProductSection({
   title,
-  icon: Icon,
+  iconName,
   products,
   viewAllHref,
   maxItems = 4,
   className = "",
 }: ProductSectionProps) {
   const displayProducts = products.slice(0, maxItems);
+  const Icon = iconName ? ICON_MAP[iconName] : null;
 
   return (
     <section
       className={cn(
         "mb-10 p-6 md:p-8 rounded-2xl bg-muted border border-border shadow-sm transition-colors",
-        className
+        className,
       )}
     >
       {/* Header */}

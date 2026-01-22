@@ -1,8 +1,6 @@
-"use client";
-
-import { TrendingUp, Sparkles, Globe, Smartphone } from "lucide-react";
-import { HeroBanner } from "@/components/banner";
-import { ProductSection } from "@/components/product/ProductSection";
+import { Suspense } from "react";
+import { HomeClientSections } from "@/components/home/HomeClientSections";
+import { HomeSkeleton } from "@/components/common/HomeSkeleton";
 import type { Product } from "@/types";
 
 // TODO: Fetch from API - mock data for different sections
@@ -12,7 +10,6 @@ const popularProducts: Product[] = [
     title: "Portfolio Starter Kit For All Use Who Want",
     description: "Professional portfolio template for developers...",
     price: 0,
-
     thumbnail: "/assets/placeholder.jpg",
     languages: ["HTML", "JS", "Nodejs"],
     isFavorite: true,
@@ -150,44 +147,38 @@ const appProducts: Product[] = [
   },
 ];
 
+// Define sections as serializable data
+const sections = [
+  {
+    title: "Phổ biến",
+    iconName: "TrendingUp" as const,
+    products: popularProducts,
+    viewAllHref: "/category/popular",
+  },
+  {
+    title: "Đề xuất cho bạn",
+    iconName: "Sparkles" as const,
+    products: recommendedProducts,
+    viewAllHref: "/category/recommended",
+  },
+  {
+    title: "Web Templates",
+    iconName: "Globe" as const,
+    products: webProducts,
+    viewAllHref: "/category/web",
+  },
+  {
+    title: "Mobile Apps",
+    iconName: "Smartphone" as const,
+    products: appProducts,
+    viewAllHref: "/category/app",
+  },
+];
+
 export default function HomePage() {
   return (
-    <>
-      {/* Hero Banner with Slider */}
-      <HeroBanner />
-
-      {/* Product Sections */}
-      <ProductSection
-        title="Phổ biến"
-        icon={TrendingUp}
-        products={popularProducts}
-        viewAllHref="/category/popular"
-        maxItems={4}
-      />
-
-      <ProductSection
-        title="Đề xuất cho bạn"
-        icon={Sparkles}
-        products={recommendedProducts}
-        viewAllHref="/category/recommended"
-        maxItems={4}
-      />
-
-      <ProductSection
-        title="Web Templates"
-        icon={Globe}
-        products={webProducts}
-        viewAllHref="/category/web"
-        maxItems={4}
-      />
-
-      <ProductSection
-        title="Mobile Apps"
-        icon={Smartphone}
-        products={appProducts}
-        viewAllHref="/category/app"
-        maxItems={4}
-      />
-    </>
+    <Suspense fallback={<HomeSkeleton />}>
+      <HomeClientSections sections={sections} />
+    </Suspense>
   );
 }
