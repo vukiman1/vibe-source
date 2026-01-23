@@ -6,6 +6,12 @@ export const API_BASE_URL =
 export const SUPPORTED_LOCALES = ["en", "vi"] as const;
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = "en";
+export const ROLES = {
+  SUPER_ADMIN: "SUPER_ADMIN",
+  ADMIN: "ADMIN",
+  USER: "USER",
+  SELLER: "SELLER",
+} as const;
 
 export const THEMES = {
   LIGHT: "light",

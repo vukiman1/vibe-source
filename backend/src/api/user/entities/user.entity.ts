@@ -17,6 +17,14 @@ export class UserEntity extends BaseEntity {
   })
   email!: string;
 
+  @Column({
+    type: "varchar",
+    nullable: true,
+    length: 255,
+    name: "avatar",
+  })
+  avatar: string;
+
   @Column({ nullable: false, type: "varchar", length: 255, name: "password" })
   @Exclude()
   password!: string;

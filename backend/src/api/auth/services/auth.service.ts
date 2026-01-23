@@ -11,6 +11,7 @@ import { JwtService } from "@app/jwt";
 import { UserService } from "src/api/user/user.service";
 import { SetCookieRFToken } from "@app/helpers/setCookieRFToken";
 import { RedisService } from "@app/redis";
+import { LoginResponse } from "../interfaces/auth.interface";
 
 @Injectable()
 export class AuthService {
@@ -25,8 +26,8 @@ export class AuthService {
       message: "Auth me",
     };
   }
-  async login(user: UserEntity, response: Response) {
-    const { id } = user;
+  async login(user: UserEntity, response: Response): Promise<LoginResponse> {
+    const { id, role, email, avatar } = user;
     const payload = { id };
     // // Generate accessToken
     const accessToken = await this.jwtService.signJwt(payload);
@@ -39,7 +40,7 @@ export class AuthService {
     // // Encrypt cookie
     const encryptId = this.cryptoService.encryptData(id);
     SetCookieRFToken(response, encryptId);
-    const result = { user, accessToken, refreshToken };
+    const result = { user: { id, role, email, avatar }, accessToken };
     return result;
   }
 

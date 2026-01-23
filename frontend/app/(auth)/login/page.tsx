@@ -16,13 +16,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { APP_NAME, ROUTES } from "@/constants";
+import { loginAction } from "@/actions/auth";
+import { LoginCredentials } from "@/types";
 
 export default function LoginPage() {
   const t = useTranslations("auth");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<LoginCredentials>({
     email: "",
     password: "",
   });
@@ -34,11 +36,9 @@ export default function LoginPage() {
     setError("");
 
     try {
-      // TODO: Call authService.login
-      // const response = await authService.login(formData);
-      // Save tokens to cookies
-      // Redirect to home
-      console.log("Login:", formData);
+      const response = await loginAction(formData);
+
+      console.log("Login:", response);
       router.push(ROUTES.HOME);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");
