@@ -14,6 +14,7 @@ import { JwtModule } from "@app/jwt";
 import configuration from "@app/config";
 import { ProductsModule } from "src/api/products/products.module";
 import { RedisModule } from "@app/redis";
+import { providers } from "./app.provider";
 
 @Module({
   imports: [
@@ -36,6 +37,6 @@ import { RedisModule } from "@app/redis";
     RedisModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ...providers],
 })
 export class AppModule {}

@@ -31,6 +31,9 @@
     "@app/jwt/(.*)": "<rootDir>/../libs/jwt/src/$1",
     "@app/my-library": "<rootDir>/../libs/my-library/src",
     "@app/my-library/(.*)": "<rootDir>/../libs/my-library/src/$1",
+    "^@app/filters(|/.*)$": "<rootDir>/../libs/filters/src/$1",
+    "^@app/interceptors(|/.*)$": "<rootDir>/../libs/interceptors/src/$1",
+    "^@app/interfaces(|/.*)$": "<rootDir>/../libs/interfaces/src/$1",
     "^app/redis(|/.*)$": "<rootDir>/../libs/redis/src/$1"
   }
 }

@@ -1,68 +1,67 @@
-import { Injectable, OnModuleDestroy, OnModuleInit } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
+import { MetadataKey, TokenExpires } from "@app/constants";
+import { RedisType } from "@app/interfaces";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import Redis from "ioredis";
 
 @Injectable()
-export class RedisService implements OnModuleInit, OnModuleDestroy {
-  private client: Redis;
+export class RedisService {
+  constructor(@Inject(MetadataKey.REDIS) private redis: Redis) {}
 
-  constructor(private readonly configService: ConfigService) {}
+  set(redisData: RedisType): Promise<"OK"> {
+    const { key, value, expired } = redisData;
+    return this.redis.set(key, value, "EX", expired);
+  }
 
-  onModuleInit() {
-    const host = this.configService.get<string>("redis.host", "localhost");
-    const port = this.configService.get<number>("redis.port", 6379);
-    const password = this.configService.get<string>("redis.password");
+  setNx(redisData: RedisType): Promise<number> {
+    return this.redis.setnx(redisData.key, redisData.value);
+  }
 
-    this.client = new Redis({
-      host,
-      port,
-      password,
+  get(key: string): Promise<string | null> {
+    return this.redis.get(key);
+  }
+  async getRefreshToken(sub: string) {
+    const key = `RF_TOKEN:${sub}`;
+    const getRfToken = await this.get(key);
+    if (!getRfToken) {
+      throw new NotFoundException("Refresh token not found");
+    }
+    return getRfToken;
+  }
+  async getAccessToken(sub: string) {
+    const key = `AC_TOKEN:${sub}`;
+    const accessToken = await this.get(key);
+    if (!accessToken) {
+      throw new NotFoundException("Access token not found");
+    }
+    return accessToken;
+  }
+  async setRefreshToken(sub: string, token: string) {
+    const key = `RF_TOKEN:${sub}`;
+    return this.set({
+      key,
+      value: token,
+      expired: TokenExpires.redisRefreshToken,
     });
   }
-
-  onModuleDestroy() {
-    this.client.disconnect();
+  async setAccessToken(sub: string, token: string) {
+    const key = `AC_TOKEN:${sub}`;
+    return this.set({
+      key,
+      value: token,
+      expired: TokenExpires.redisAccessToken,
+    });
+  }
+  async del(key: string) {
+    return this.redis.del(key);
   }
 
-  getClient(): Redis {
-    return this.client;
+  async delRFToken(sub: string) {
+    const key = `RF_TOKEN:${sub}`;
+    return this.redis.del(key);
   }
 
-  async set(key: string, value: string, ttl?: number): Promise<void> {
-    if (ttl) {
-      await this.client.set(key, value, "EX", ttl);
-    } else {
-      await this.client.set(key, value);
-    }
-  }
-
-  async get(key: string): Promise<string | null> {
-    return await this.client.get(key);
-  }
-
-  async del(key: string): Promise<void> {
-    await this.client.del(key);
-  }
-
-  async hset(key: string, field: string, value: string): Promise<void> {
-    await this.client.hset(key, field, value);
-  }
-
-  async hget(key: string, field: string): Promise<string | null> {
-    return await this.client.hget(key, field);
-  }
-
-  async hdel(key: string, field: string): Promise<void> {
-    await this.client.hdel(key, field);
-  }
-
-  async setAccessToken(userId: string | number, token: string): Promise<void> {
-    const ttl = 15 * 24 * 60 * 60;
-    await this.set(`access_token:${userId}`, token, ttl);
-  }
-
-  async setRefreshToken(userId: string | number, token: string): Promise<void> {
-    const ttl = 30 * 24 * 60 * 60;
-    await this.set(`refresh_token:${userId}`, token, ttl);
+  async delAccessToken(sub: string) {
+    const key = `AC_TOKEN:${sub}`;
+    return this.redis.del(key);
   }
 }

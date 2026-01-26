@@ -1,33 +1,33 @@
 import dotenv from "dotenv";
 
 dotenv.config({
-  path: [".env", ".env.local", ".env.production"],
+  path: [".env", ".env.local", ".env.production", ".env.example"],
 });
 
 export default () => ({
   app: {
-    port: parseInt(process.env.PORT || "8000", 10),
-    nodeEnv: process.env.NODE_ENV || "local",
+    port: parseInt(process.env.PORT as string, 10),
+    nodeEnv: process.env.NODE_ENV,
   },
   database: {
-    host: process.env.DB_HOST || "localhost",
-    port: parseInt(process.env.DB_PORT || "5432", 10),
-    username: process.env.DB_USERNAME || "admin",
-    password: process.env.DB_PASSWORD || "admin",
-    database: process.env.DB_NAME || "myapp",
+    host: process.env.DB_HOST,
+    port: parseInt(process.env.DB_PORT as string, 10),
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
   },
   jwt: {
-    secret: process.env.JWT_SECRET || "secret",
-    refreshTokenExpiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRES_IN || "30d",
-    accessTokenExpiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRES_IN || "15d",
+    secret: process.env.JWT_SECRET,
+    refreshTokenExpiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRES_IN,
+    accessTokenExpiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRES_IN,
   },
   crypto: {
-    secretKey: process.env.SECRET_KEY || "vibe_source_secret_key",
-    secretKeyIv: process.env.SECRET_KEY_IV || "vibe_source_secret_iv",
+    secretKey: process.env.SECRET_KEY,
+    secretKeyIv: process.env.SECRET_KEY_IV,
   },
   redis: {
-    host: process.env.REDIS_HOST || "localhost",
-    port: parseInt(process.env.REDIS_PORT || "6379", 10),
+    host: process.env.REDIS_HOST,
+    port: parseInt(process.env.REDIS_PORT as string, 10),
     password: process.env.REDIS_PASSWORD || undefined,
   },
 });

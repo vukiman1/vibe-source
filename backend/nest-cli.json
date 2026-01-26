@@ -10,8 +10,7 @@
         "watchAssets": true
       }
     ],
-    "webpack": true,
-    "webpackConfigPath": "webpack.config.js"
+    "webpack": true
   },
   "projects": {
     "base": {
@@ -77,6 +76,15 @@
         "tsConfigPath": "libs/enum/tsconfig.lib.json"
       }
     },
+    "filters": {
+      "type": "library",
+      "root": "libs/filters",
+      "entryFile": "index",
+      "sourceRoot": "libs/filters/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/filters/tsconfig.lib.json"
+      }
+    },
     "helpers": {
       "type": "library",
       "root": "libs/helpers",
@@ -84,6 +92,24 @@
       "sourceRoot": "libs/helpers/src",
       "compilerOptions": {
         "tsConfigPath": "libs/helpers/tsconfig.lib.json"
+      }
+    },
+    "interceptors": {
+      "type": "library",
+      "root": "libs/interceptors",
+      "entryFile": "index",
+      "sourceRoot": "libs/interceptors/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/interceptors/tsconfig.lib.json"
+      }
+    },
+    "interfaces": {
+      "type": "library",
+      "root": "libs/interfaces",
+      "entryFile": "index",
+      "sourceRoot": "libs/interfaces/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/interfaces/tsconfig.lib.json"
       }
     },
     "jwt": {

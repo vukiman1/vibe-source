@@ -26,7 +26,7 @@
     "migration:generate": "npm run typeorm -- -d ./ormconfigs.ts migration:generate ./src/migrations/$npm_config_name",
     "migration:create": "npm run typeorm -- migration:create ./src/migrations/$npm_config_name",
     "migration:revert": "npm run typeorm -- -d ./ormconfigs.ts migration:revert",
-    "g:lib": "nest g lib $npm_config_name --prefix app"
+    "g:lib": "nest g lib"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -120,7 +120,10 @@
       "^@app/database(|/.*)$": "<rootDir>/libs/database/src/$1",
       "^@app/decorators(|/.*)$": "<rootDir>/libs/decorators/src/$1",
       "^@app/enum(|/.*)$": "<rootDir>/libs/enum/src/$1",
+      "^@app/filters(|/.*)$": "<rootDir>/libs/filters/src/$1",
       "^@app/helpers(|/.*)$": "<rootDir>/libs/helpers/src/$1",
+      "^@app/interceptors(|/.*)$": "<rootDir>/libs/interceptors/src/$1",
+      "^@app/interfaces(|/.*)$": "<rootDir>/libs/interfaces/src/$1",
       "^@app/jwt(|/.*)$": "<rootDir>/libs/jwt/src/$1",
       "^@app/my-library(|/.*)$": "<rootDir>/libs/my-library/src/$1",
       "^@app/redis(|/.*)$": "<rootDir>/libs/redis/src/$1"
