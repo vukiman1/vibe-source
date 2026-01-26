@@ -15,10 +15,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
 import { useCurrency } from "@/providers/currency-provider";
 import { formatCurrency, convertFromVND } from "@/lib/currency";
-import { ROUTES } from "@/constants";
 
 const PAYMENT_METHODS = [
   { id: "card", name: "Credit Card", icon: CreditCard },

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import { Toaster } from "sonner";
 import { Providers } from "@/providers";
 import { FloatingButtons } from "@/components/common/FloatingButtons";
 import { APP_NAME } from "@/constants";
@@ -39,6 +40,7 @@ export default async function RootLayout({
             {children}
             <FloatingButtons />
           </Providers>
+          <Toaster richColors position="top-right" />
         </NextIntlClientProvider>
       </body>
     </html>

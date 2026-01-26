@@ -1,3 +1,5 @@
+import { UserRole } from ".";
+
 export interface LoginCredentials {
   email: string;
   password: string;
@@ -19,12 +21,13 @@ export interface AuthUser {
   id: string;
   email: string;
   name: string;
-  avatar?: string;
-  role: "user" | "admin";
+  role: UserRole;
+  avatar: string | null;
 }
 
-export interface AuthResponse {
+export interface LoginResponseData {
   user: AuthUser;
   accessToken: string;
-  refreshToken: string;
 }
+
+export type AuthResponse = LoginResponseData;

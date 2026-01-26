@@ -1,15 +1,21 @@
-export interface ApiResponse<T> {
-  data: T;
-  message: string;
-  success: boolean;
+export interface Pagination {
+  limit: number;
+  page: number;
+  totalPages: number;
+  totalItems: number;
 }
 
-export interface PaginatedResponse<T> {
-  data: T[];
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
+export type UserRole = "SUPER_ADMIN" | "ADMIN" | "USER" | "SELLER";
+
+export interface ApiResponse<T> {
+  statusCode: number;
+  success: boolean;
+  data: T;
+  errors?: unknown;
+}
+
+export interface PaginatedResponse<T> extends ApiResponse<T[]> {
+  metadata: Pagination;
 }
 
 export interface SourceCode {

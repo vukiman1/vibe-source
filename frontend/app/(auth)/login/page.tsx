@@ -18,33 +18,34 @@ import {
 import { APP_NAME, ROUTES } from "@/constants";
 import { loginAction } from "@/actions/auth";
 import { LoginCredentials } from "@/types";
+import { useUserStore } from "@/stores";
+import { useServerAction } from "@/hooks";
 
 export default function LoginPage() {
   const t = useTranslations("auth");
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    execute: login,
+    isPending,
+    error,
+  } = useServerAction(loginAction, {
+    onSuccess: (data) => {
+      if (data?.user) {
+        useUserStore.getState().setUser(data.user);
+        router.push(ROUTES.HOME);
+      }
+    },
+  });
+
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState<LoginCredentials>({
     email: "",
     password: "",
   });
-  const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    setError("");
-
-    try {
-      const response = await loginAction(formData);
-
-      console.log("Login:", response);
-      router.push(ROUTES.HOME);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Login failed");
-    } finally {
-      setIsLoading(false);
-    }
+    login(formData);
   };
 
   return (
@@ -80,7 +81,7 @@ export default function LoginPage() {
                 setFormData({ ...formData, email: e.target.value })
               }
               required
-              disabled={isLoading}
+              disabled={isPending}
             />
           </div>
           <div className="space-y-2">
@@ -105,7 +106,7 @@ export default function LoginPage() {
                   setFormData({ ...formData, password: e.target.value })
                 }
                 required
-                disabled={isLoading}
+                disabled={isPending}
               />
               <Button
                 type="button"
@@ -124,8 +125,8 @@ export default function LoginPage() {
           </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          <Button type="submit" className="w-full" disabled={isPending}>
+            {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {t("login")}
           </Button>
           <p className="text-sm text-muted-foreground text-center">

@@ -1,12 +1,7 @@
 "use client";
 
 import { useCurrency } from "@/providers/currency-provider";
-import {
-  CURRENCIES,
-  convertFromVND,
-  formatCurrency,
-  type CurrencyCode,
-} from "@/lib/currency";
+import { CURRENCIES, type CurrencyCode } from "@/lib/currency";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,7 +35,7 @@ export function CurrencySelector({
           <button
             className={cn(
               "inline-flex items-center gap-1 hover:opacity-80 transition-opacity text-sm font-medium",
-              className
+              className,
             )}
           >
             <span className="text-lg">{currencyInfo.symbol}</span>
@@ -84,11 +79,7 @@ export function CurrencySelector({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          className={cn("gap-2", className)}
-        >
+        <Button variant="ghost" size="sm" className={cn("gap-2", className)}>
           <Globe className="h-4 w-4" />
           <span className="text-lg">{currencyInfo.symbol}</span>
           <span className="font-medium">{currency}</span>
@@ -127,4 +118,3 @@ export function CurrencySelector({
     </DropdownMenu>
   );
 }
-

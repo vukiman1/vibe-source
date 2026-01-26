@@ -1,28 +1,28 @@
-import { api } from '@/lib/request';
+import { api } from "@/lib/request";
 import type {
   LoginCredentials,
   RegisterCredentials,
-  AuthResponse,
+  LoginResponseData,
   AuthUser,
-} from '@/types';
+} from "@/types";
 
 const AUTH_ENDPOINTS = {
-  LOGIN: '/auth/login',
-  REGISTER: '/auth/register',
-  LOGOUT: '/auth/logout',
-  REFRESH: '/auth/refresh',
-  ME: '/auth/me',
-  FORGOT_PASSWORD: '/auth/forgot-password',
-  RESET_PASSWORD: '/auth/reset-password',
+  LOGIN: "/auth/login",
+  REGISTER: "/auth/register",
+  LOGOUT: "/auth/logout",
+  REFRESH: "/auth/refresh",
+  ME: "/auth/me",
+  FORGOT_PASSWORD: "/auth/forgot-password",
+  RESET_PASSWORD: "/auth/reset-password",
 };
 
 export const authService = {
   async login(credentials: LoginCredentials) {
-    return api.post<AuthResponse>(AUTH_ENDPOINTS.LOGIN, credentials);
+    return api.post<LoginResponseData>(AUTH_ENDPOINTS.LOGIN, credentials);
   },
 
   async register(credentials: RegisterCredentials) {
-    return api.post<AuthResponse>(AUTH_ENDPOINTS.REGISTER, credentials);
+    return api.post<LoginResponseData>(AUTH_ENDPOINTS.REGISTER, credentials);
   },
 
   async logout() {

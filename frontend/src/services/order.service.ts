@@ -1,11 +1,11 @@
-import { api } from '@/lib/request';
-import type { Order, CartItem, PaginatedResponse } from '@/types';
+import { api } from "@/lib/request";
+import type { Order, PaginatedResponse } from "@/types";
 
 const ORDER_ENDPOINTS = {
-  LIST: '/orders',
+  LIST: "/orders",
   DETAIL: (id: string) => `/orders/${id}`,
-  CREATE: '/orders',
-  CHECKOUT: '/orders/checkout',
+  CREATE: "/orders",
+  CHECKOUT: "/orders/checkout",
   CANCEL: (id: string) => `/orders/${id}/cancel`,
 };
 
@@ -43,7 +43,7 @@ export const orderService = {
   async checkout(data: CheckoutData) {
     return api.post<{ paymentUrl: string; orderId: string }>(
       ORDER_ENDPOINTS.CHECKOUT,
-      data
+      data,
     );
   },
 

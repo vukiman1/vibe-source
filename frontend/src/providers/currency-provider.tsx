@@ -15,7 +15,7 @@ interface CurrencyContextType {
 }
 
 const CurrencyContext = createContext<CurrencyContextType | undefined>(
-  undefined
+  undefined,
 );
 
 interface CurrencyProviderProps {
@@ -31,6 +31,7 @@ export function CurrencyProvider({ children }: CurrencyProviderProps) {
   useEffect(() => {
     const stored = localStorage.getItem(CURRENCY_STORAGE_KEY);
     if (stored && isValidCurrency(stored)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCurrencyState(stored as CurrencyCode);
     }
   }, []);

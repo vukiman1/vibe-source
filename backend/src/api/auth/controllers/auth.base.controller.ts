@@ -1,3 +1,4 @@
+import { StrategyKey } from "@app/constants";
 import { User } from "@app/decorators/user.decorator";
 import { Body, HttpCode, Post, Res, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
@@ -45,13 +46,20 @@ export const AuthBaseController = <Entity extends UserEntity>(
     //   return this.authService.changePassword(body, user, userType);
     // }
 
-    // @Get('logout')
-    // @HttpCode(200)
-    // @ApiLogout(userType)
-    // @AuthAdmin()
-    // async logout(@User() user: Entity) {
-    //   return this.authService.logout(user);
-    // }
+    @Post("logout")
+    @HttpCode(200)
+    @UseGuards(
+      AuthGuard(
+        StrategyKey.JWT[userType.toUpperCase() as keyof typeof StrategyKey.JWT],
+      ),
+    )
+    async logout(
+      @User() user: Entity,
+      @Res({ passthrough: true }) response: Response,
+    ) {
+      response.clearCookie("sub");
+      return this.authService.logout(user);
+    }
   }
 
   return BaseController;

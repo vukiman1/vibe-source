@@ -1,11 +1,12 @@
 export const APP_NAME = "Vibe Source";
 
 export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
 
 export const SUPPORTED_LOCALES = ["en", "vi"] as const;
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = "en";
+export const DEFAULT_AVATAR = "/assets/users/avatars/default-avatar.jpeg";
 export const ROLES = {
   SUPER_ADMIN: "SUPER_ADMIN",
   ADMIN: "ADMIN",
@@ -45,3 +46,9 @@ export const PUBLIC_ROUTES = [
 export const AUTH_ROUTES = ["/login", "/register", "/forgot-password"];
 
 export const PROTECTED_ROUTES = ["/checkout", "/profile", "/orders"];
+
+export const AUTH_CONFIG = {
+  ACCESS_TOKEN_KEY: "access_token",
+  REFRESH_TOKEN_KEY: "refresh_token",
+  BACKEND_KEY: "backend",
+};

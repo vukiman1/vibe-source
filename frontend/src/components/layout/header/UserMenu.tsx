@@ -24,6 +24,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useTheme } from "next-themes";
 import { useLocaleSwitch } from "@/hooks";
+import { useUserStore } from "@/stores";
+import { DEFAULT_AVATAR } from "@/constants";
+
+import { logoutAction } from "@/actions/auth";
 
 const localeNames: Record<string, string> = {
   en: "English",
@@ -33,14 +37,21 @@ const localeNames: Record<string, string> = {
 export function UserMenu() {
   const { setTheme, theme } = useTheme();
   const { locale, switchLocale, locales } = useLocaleSwitch();
+  const { user, logout } = useUserStore();
+
+  const handleLogout = async () => {
+    await logoutAction(); // Clear server cookies
+    logout(); // Clear client state
+    window.location.reload(); // Refresh to clear any other state/cache
+  };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="h-9 w-9 border-2 border-orange-200 cursor-pointer transition-transform hover:scale-105 active:scale-95">
-          <AvatarImage src="/assets/avatar-placeholder.jpg" />
+          <AvatarImage src={user?.avatar || DEFAULT_AVATAR} />
           <AvatarFallback className="bg-orange-100 text-orange-600 font-bold">
-            K
+            {user?.name?.[0]?.toUpperCase() || "U"}
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
@@ -101,7 +112,10 @@ export function UserMenu() {
         </DropdownMenuSub>
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-red-600 focus:text-red-600">
+        <DropdownMenuItem
+          className="text-red-600 focus:text-red-600 cursor-pointer"
+          onClick={handleLogout}
+        >
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
         </DropdownMenuItem>

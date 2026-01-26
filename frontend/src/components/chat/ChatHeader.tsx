@@ -11,7 +11,7 @@ interface ChatHeaderProps {
 /**
  * Chat header with seller info and controls
  */
-export function ChatHeader({ onClose: _onClose }: ChatHeaderProps) {
+export function ChatHeader({}: ChatHeaderProps) {
   // TODO: Get actual seller data from context/props
   const seller = {
     name: "@PixelPerfect",

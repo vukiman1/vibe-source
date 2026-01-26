@@ -43,7 +43,9 @@ export function CurrencyDisplay({
   const [mounted, setMounted] = useState(false);
 
   // Prevent hydration mismatch
+  // Prevent hydration mismatch
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
@@ -78,7 +80,7 @@ export function CurrencyDisplay({
         <button
           className={cn(
             "inline-flex items-center gap-1 hover:opacity-80 transition-opacity",
-            className
+            className,
           )}
         >
           <span>{formattedAmount}</span>
@@ -93,12 +95,6 @@ export function CurrencyDisplay({
         {(Object.keys(CURRENCIES) as CurrencyCode[]).map((code) => {
           const currencyInfo = CURRENCIES[code];
           const isSelected = currency === code;
-          const amount =
-            code === "VND" ? amountInVND : convertFromVND(amountInVND, code);
-          const formatted = formatCurrency(amount, code, {
-            showSymbol: true,
-            compact: false,
-          });
 
           return (
             <DropdownMenuItem
@@ -127,7 +123,7 @@ export function CurrencyDisplay({
               ? amountInVND
               : convertFromVND(amountInVND, currency),
             currency,
-            { showSymbol: true, compact: false }
+            { showSymbol: true, compact: false },
           )}
         </div>
       </DropdownMenuContent>

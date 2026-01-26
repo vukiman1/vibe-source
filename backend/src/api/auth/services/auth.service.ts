@@ -64,4 +64,36 @@ export class AuthService {
       email,
     };
   }
+  async logout(user: UserEntity) {
+    const { id } = user;
+    await this.redisService.delRFToken(id);
+    await this.redisService.delAccessToken(id);
+    return {
+      message: "Logout successfully",
+    };
+  }
+
+  // async refreshToken(request: Request, userType: UserType) {
+  //   const { sub } = request.cookies;
+
+  //   const decryptData = this.cryptoService.decryptData(sub);
+  //   const refreshToken = await this.redisService.getRefreshToken(decryptData);
+  //   // Get Token from refresh token
+  //   const user = await this.getUser(refreshToken, userType);
+  //   const { id } = user;
+  //   const accessToken = this.jwtService.signJwt({ id });
+  //   const result = { user, accessToken };
+  //   return result;
+  // }
+
+  // async getUser(refreshToken: string, userType: UserType) {
+  //   const { id } = await this.jwtService.verifyJwt(refreshToken);
+  //   const where = { id };
+  //   const targetServices = this.getService(userType);
+  //   const user = await targetServices.getOne(where);
+  //   if (!user) {
+  //     throw new NotFoundException("User not found");
+  //   }
+  //   return user;
+  // }
 }
