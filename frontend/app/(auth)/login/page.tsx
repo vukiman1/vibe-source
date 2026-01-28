@@ -39,8 +39,8 @@ export default function LoginPage() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState<LoginCredentials>({
-    email: "",
-    password: "",
+    email: "admin@gmail.com",
+    password: "123456",
   });
 
   const handleSubmit = (e: React.FormEvent) => {

@@ -1,0 +1,20 @@
+meta {
+  name: credit
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{BASE_URL}}user/credit
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNjMTY1YWRkLTk5ODUtNDA5NC1iYTM4LWQ3NmIzODRmOWM0NiIsImlhdCI6MTc2OTQ4MTQ2NiwiZXhwIjoxNzcwNzc3NDY2fQ.9ztHhun4XnZtwzcWnSQ8uQhQ4R0iCc0UEfj4pGiPYSs
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

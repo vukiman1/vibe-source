@@ -17,4 +17,12 @@ export class UserService extends BaseService<UserEntity> {
   async testGetAllUsers() {
     return this.getAll();
   }
+
+  async getUserCredit(id: string) {
+    const user = await this.getOneOrFail({ id });
+    return {
+      balance: user.balance,
+      token: user.token,
+    };
+  }
 }

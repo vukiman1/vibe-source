@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import {
-  AUTH_COOKIE_NAME,
+  AUTH_CONFIG,
   AUTH_ROUTES,
   PROTECTED_ROUTES,
   ROUTES,
@@ -9,16 +9,16 @@ import {
 
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const token = request.cookies.get(AUTH_COOKIE_NAME)?.value;
+  const token = request.cookies.get(AUTH_CONFIG.ACCESS_TOKEN_KEY)?.value;
 
   // Check if current path is protected
   const isProtectedRoute = PROTECTED_ROUTES.some(
-    (route) => pathname.startsWith(route) || pathname === route
+    (route) => pathname.startsWith(route) || pathname === route,
   );
 
   // Check if current path is auth route (login, register)
   const isAuthRoute = AUTH_ROUTES.some(
-    (route) => pathname.startsWith(route) || pathname === route
+    (route) => pathname.startsWith(route) || pathname === route,
   );
 
   // Redirect to login if accessing protected route without token

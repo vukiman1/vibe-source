@@ -69,6 +69,8 @@ export interface User {
   email: string;
   name: string;
   avatar?: string;
+  balance?: number;
+  token?: number;
 }
 
 export interface CartItem {

@@ -25,6 +25,22 @@ export class UserEntity extends BaseEntity {
   })
   avatar: string;
 
+  @Column({
+    type: "int",
+    nullable: false,
+    default: 0,
+    name: "balance",
+  })
+  balance!: number;
+
+  @Column({
+    type: "int",
+    nullable: false,
+    default: 0,
+    name: "token",
+  })
+  token!: number;
+
   @Column({ nullable: false, type: "varchar", length: 255, name: "password" })
   @Exclude()
   password!: string;

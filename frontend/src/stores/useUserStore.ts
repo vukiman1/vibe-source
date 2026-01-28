@@ -2,9 +2,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { AuthUser } from "@/types";
 
-export type User = AuthUser & {
-  tokens?: number;
-};
+export type User = AuthUser;
 
 interface UserState {
   user: User | null;
@@ -48,7 +46,7 @@ export const useUserStore = create<UserStore>()(
       updateTokens: (amount) => {
         set((state) => ({
           user: state.user
-            ? { ...state.user, tokens: (state.user.tokens || 0) + amount }
+            ? { ...state.user, token: (state.user.token || 0) + amount }
             : null,
         }));
       },

@@ -23,6 +23,8 @@ export interface AuthUser {
   name: string;
   role: UserRole;
   avatar: string | null;
+  balance: number;
+  token: number;
 }
 
 export interface LoginResponseData {
