@@ -52,7 +52,10 @@ export function CartMenu() {
           </Button>
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-80 p-0 overflow-hidden">
+      <DropdownMenuContent
+        align="end"
+        className="w-80 p-0 overflow-hidden animate-in zoom-in-95 fade-in-0 duration-200"
+      >
         <div className="p-4 border-b bg-muted/30">
           <h3 className="font-bold text-sm uppercase tracking-wider">
             {t("title")}

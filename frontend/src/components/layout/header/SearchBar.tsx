@@ -48,10 +48,19 @@ export function SearchBar() {
   const t = useTranslations("header");
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [isReadOnly, setIsReadOnly] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { isSearchExpanded, expandSearch, collapseSearch } = useSidebarStore();
+
+  // Prevent autofill with readonly trick
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsReadOnly(false);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Handle click outside
   useEffect(() => {
@@ -134,15 +143,26 @@ export function SearchBar() {
           </button>
           <Input
             ref={inputRef}
-            type="search"
+            type="text"
+            name="search-query"
             value={query}
             onChange={(e) => {
               setQuery(e.target.value);
               setIsOpen(true);
             }}
-            onFocus={() => setIsOpen(true)}
+            onFocus={(e) => {
+              if (isReadOnly) {
+                e.target.removeAttribute("readonly");
+                setIsReadOnly(false);
+              }
+              setIsOpen(true);
+            }}
             onKeyDown={handleKeyDown}
             placeholder={t("search-placeholder")}
+            autoComplete="chrome-off"
+            data-form-type="other"
+            data-lpignore="true"
+            readOnly={isReadOnly}
             className="flex-1 border-none bg-transparent shadow-none focus-visible:ring-0 placeholder:text-muted-foreground/70"
           />
           {/* {query && (

@@ -30,6 +30,36 @@ export function Header({ className }: HeaderProps) {
         className,
       )}
     >
+      {/* Hidden fake inputs to trap browser autofill */}
+      <input
+        type="text"
+        name="fake-username"
+        autoComplete="username"
+        tabIndex={-1}
+        style={{
+          position: "absolute",
+          opacity: 0,
+          height: 0,
+          width: 0,
+          pointerEvents: "none",
+        }}
+        aria-hidden="true"
+      />
+      <input
+        type="password"
+        name="fake-password"
+        autoComplete="current-password"
+        tabIndex={-1}
+        style={{
+          position: "absolute",
+          opacity: 0,
+          height: 0,
+          width: 0,
+          pointerEvents: "none",
+        }}
+        aria-hidden="true"
+      />
+
       <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4">
         {!isSearchExpanded && (
           <Button
