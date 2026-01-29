@@ -4,9 +4,11 @@ import { Plus, Wallet, Coins } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "@/i18n";
 import { CurrencyDisplay } from "@/components";
+import { useUserCredit } from "@/hooks";
 
 export function HeaderStats() {
   const t = useTranslations("header");
+  const { data } = useUserCredit();
 
   return (
     <div className="hidden lg:flex items-center gap-4">
@@ -20,8 +22,8 @@ export function HeaderStats() {
         </div>
         <div className="flex items-center gap-1.5 px-3">
           <CurrencyDisplay
-            amountInVND={2450000}
-            className="text-sm font-black text-slate-800"
+            amountInVND={data?.balance || 0}
+            className="text-sm font-black"
             compact={false}
           />
           <Button
@@ -43,7 +45,9 @@ export function HeaderStats() {
           </span>
         </div>
         <div className="flex items-center gap-1.5 px-3">
-          <span className="text-sm font-black text-purple-700">1,250</span>
+          <span className="text-sm font-black text-purple-700">
+            {data?.token || 0}
+          </span>
           <Button
             variant="ghost"
             size="icon"

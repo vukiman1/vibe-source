@@ -29,7 +29,7 @@ import { useLocaleSwitch } from "@/hooks";
 import { useUserStore } from "@/stores";
 import { DEFAULT_AVATAR } from "@/constants";
 
-import { logoutAction } from "@/actions/auth";
+import tokenService from "@/services/token.service";
 
 const localeNames: Record<string, string> = {
   en: "English",
@@ -40,9 +40,8 @@ export function UserMenu() {
   const { setTheme, theme } = useTheme();
   const { locale, switchLocale, locales } = useLocaleSwitch();
   const { user, logout } = useUserStore();
-
-  const handleLogout = async () => {
-    await logoutAction(); // Clear server cookies
+  const handleLogout = () => {
+    tokenService.removeAccessTokenAndRefreshTokenFromCookie(); // Clear cookies
     logout(); // Clear client state
     window.location.reload(); // Refresh to clear any other state/cache
   };
@@ -59,6 +58,7 @@ export function UserMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/profile" className="cursor-pointer">

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ShoppingBag, X } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants";
 import { useTranslations } from "@/i18n";
@@ -41,13 +41,13 @@ export function CartMenu() {
           <Button
             variant="ghost"
             size="icon"
-            className="rounded-full hover:bg-muted relative"
+            className="rounded-full bg-muted/40 hover:bg-muted relative text-muted-foreground hover:text-foreground transition-all border border-transparent hover:border-border"
           >
-            <ShoppingBag className="h-6 w-6 text-slate-700" />
+            <ShoppingBag className="h-5 w-5" />
             {count > 0 && (
-              <Badge className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-0 text-[10px] text-white">
+              <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white ring-2 ring-background transition-all">
                 {count}
-              </Badge>
+              </span>
             )}
           </Button>
         </div>

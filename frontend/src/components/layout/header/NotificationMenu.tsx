@@ -1,7 +1,7 @@
 "use client";
 
 import { Bell, Check, Info, AlertTriangle } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -49,11 +49,13 @@ export function NotificationMenu() {
           <Button
             variant="ghost"
             size="icon"
-            className="rounded-full hover:bg-muted relative"
+            className="rounded-full bg-muted/40 hover:bg-muted relative text-muted-foreground hover:text-foreground transition-all border border-transparent hover:border-border"
           >
-            <Bell className="h-6 w-6 text-slate-700" />
+            <Bell className="h-5 w-5" />
             {unreadCount > 0 && (
-              <Badge className="absolute right-1 top-1 h-2.5 w-2.5 rounded-full bg-red-500 p-0 border-2 border-background" />
+              <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white ring-2 ring-background transition-all">
+                {unreadCount}
+              </span>
             )}
           </Button>
         </div>
@@ -77,7 +79,7 @@ export function NotificationMenu() {
                 key={notification.id}
                 className={cn(
                   "flex items-start gap-3 p-4 focus:bg-muted/50 border-b last:border-b-0 cursor-pointer",
-                  !notification.read && "bg-blue-50/30"
+                  !notification.read && "bg-blue-50/30",
                 )}
               >
                 <div
@@ -88,7 +90,7 @@ export function NotificationMenu() {
                     notification.type === "info" &&
                       "bg-blue-100 text-blue-600 border-blue-200",
                     notification.type === "warning" &&
-                      "bg-amber-100 text-amber-600 border-amber-200"
+                      "bg-amber-100 text-amber-600 border-amber-200",
                   )}
                 >
                   {notification.type === "success" && (
@@ -108,7 +110,7 @@ export function NotificationMenu() {
                         "text-xs font-bold truncate",
                         !notification.read
                           ? "text-slate-900"
-                          : "text-slate-600 uppercase tracking-wide text-[10px]"
+                          : "text-slate-600 uppercase tracking-wide text-[10px]",
                       )}
                     >
                       {notification.title}

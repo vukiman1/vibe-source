@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,26 +15,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { APP_NAME, ROUTES } from "@/constants";
-import { loginAction } from "@/actions/auth";
 import { LoginCredentials } from "@/types";
-import { useUserStore } from "@/stores";
-import { useServerAction } from "@/hooks";
+import { useLoginMutation } from "@/hooks/use-login-mutation";
 
 export default function LoginPage() {
   const t = useTranslations("auth");
-  const router = useRouter();
-  const {
-    execute: login,
-    isPending,
-    error,
-  } = useServerAction(loginAction, {
-    onSuccess: (data) => {
-      if (data?.user) {
-        useUserStore.getState().setUser(data.user);
-        router.push(ROUTES.HOME);
-      }
-    },
-  });
+  const { mutate: login, isPending, error } = useLoginMutation();
 
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState<LoginCredentials>({
@@ -65,7 +50,7 @@ export default function LoginPage() {
         <CardContent className="space-y-4">
           {error && (
             <div className="p-3 text-sm text-destructive bg-destructive/10 rounded-md">
-              {error}
+              {error.message}
             </div>
           )}
           <div className="space-y-2">
